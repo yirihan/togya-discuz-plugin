@@ -1,0 +1,14 @@
+.DS_Store
+._*
+__MACOSX/
+PROGRESS.md
+.env
+.env.*
+!.env.example
+__pycache__/
+*.pyc
+dist/
+build/
+vendor-local/
+private/
+artifacts-private/
