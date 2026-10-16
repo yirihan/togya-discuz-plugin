@@ -12,8 +12,11 @@ This is a target matrix. No installable standalone release has passed it yet.
 | HTTPS | Canonical root origin with strict host/origin checks | Generic configuration checked synthetically; subdirectory deployments not claimed |
 | UI | PC and Touch | Standalone rendering not run |
 | Scheduling | Plugin-owned CLI; no frontend heavy work | Local candidate implementation; real cron/runtime verification pending |
+| Private display storage | Outside-webroot directory with owner-only access; same Web/CLI user | Source contract reviewed; deployment provisioning and native runtime gate outstanding |
 | DX X3.x | Not supported by the initial contract | No compatibility claim |
 
 Native interactions, task adapters and credit rewards have separate gates. The plugin will not silently overwrite official core files. Missing integrations must disable affected backend operations.
 
 Customized existing deployments are not an upgrade target for the first generic package. Do not install a generic candidate over an existing customized integration without a reviewed data and compatibility path.
+
+Shared-hosting environments that cannot provide the required private cache or process supervision are not currently claimed as supported. Do not weaken isolation to simulate compatibility.

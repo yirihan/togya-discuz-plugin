@@ -8,6 +8,8 @@ Togya Plugin is a developing integration between Discuz X5 forums and [Togya](ht
 
 **Current publication: documentation preview. There is no supported installable release yet. Do not install an arbitrary repository snapshot on a production forum.**
 
+The [draft operator guide](docs/INSTALL.md) covers intended installation, key management, maintenance, upgrade and uninstall behavior without claiming those lifecycle gates passed.
+
 ## Planned Capabilities
 
 | Capability | Intended behavior | Standalone release status |
