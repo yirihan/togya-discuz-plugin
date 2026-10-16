@@ -4,10 +4,10 @@ This is a target matrix. No installable standalone release has passed it yet.
 
 | Component | Target | Current evidence |
 | --- | --- | --- |
-| Discuz | DX X5 | Standalone install not run |
-| PHP | 8.2+; bundled QR support requires 8.2 | Local PHP 8.5 tooling available; not an application test |
+| Discuz | DX X5 | Official X5.0.4 Intl fixture prepared; native plugin install gate not passed |
+| PHP | 8.2+; bundled QR support requires 8.2 | Syntax/synthetic checks on 8.2.34 and local 8.5; no full application certification |
 | PHP extensions | Sodium, mbstring, JSON, mysqli and HTTPS transport; process supervision for CLI workers | Full runtime matrix not run |
-| Database | MySQL 8 with InnoDB | Isolated install and concurrency tests not run |
+| Database | MySQL 8 with InnoDB | Isolated MySQL 8.4.11 fixture; plugin-install and financial-concurrency gates not passed |
 | MariaDB | Not yet claimed | Not run |
 | HTTPS | Canonical root origin with strict host/origin checks | Generic configuration checked synthetically; subdirectory deployments not claimed |
 | UI | PC and Touch | Standalone rendering not run |
