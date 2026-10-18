@@ -6,7 +6,7 @@
 
 Togya Plugin is a developing integration between Discuz X5 forums and [Togya](https://togya.com). It is designed to connect forum accounts, turn supported Togya activities into forum topics, and show authorized progress inside the community.
 
-**Current candidate: `1.0.0-alpha.3-x5`, an experimental development preview, not an RC or a production-supported release.** The source and a checksummed Alpha package are being published in stages. See [GitHub Releases](https://github.com/yirihan/togya-discuz-plugin/releases) for assets actually available; do not infer publication from a local build.
+**Available: `1.0.0-alpha.3-x5`, an experimental development preview, not an RC or a production-supported release.** Download the [Alpha package and checksum](https://github.com/yirihan/togya-discuz-plugin/releases/tag/v1.0.0-alpha.3-x5). The published ZIP was downloaded again and verified; the remaining runtime gates are not thereby certified.
 
 The [operator guide](docs/INSTALL.md) covers intended installation, key management, maintenance, upgrade and uninstall behavior. Use a disposable complete DX X5 instance; no production installation is certified.
 
