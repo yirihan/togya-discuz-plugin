@@ -1,6 +1,6 @@
-# Operator Guide (Draft)
+# Operator Guide
 
-**This guide describes the intended standalone candidate interface. An earlier candidate passed a fresh-install check, but the current candidate's full lifecycle and end-to-end gates remain incomplete. There is no supported RC/stable package, and these instructions are not approval to install a snapshot on production.**
+**Guide for the published `1.0.0-x5` generic distribution. It preserves the owner's locally tested behavior; portable packaging checks are not a new full lifecycle/payment certification. Read the release status and compatibility boundaries before installation.**
 
 [简体中文](INSTALL.zh-CN.md) · [Actual status](STATUS.md) · [Compatibility](COMPATIBILITY.md)
 

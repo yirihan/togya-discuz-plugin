@@ -21,4 +21,4 @@ ZIP entry order, timestamps and regular-file modes are fixed. The archive includ
 
 Validation must still inspect the produced archive on Linux, check every manifest entry and verify the downloaded release checksum. A passed packager test or a checksum match cannot replace P2/P3 runtime gates. See [STATUS.md](STATUS.md) for the actual release state.
 
-The Alpha source candidate is for disposable evaluation, not production certification. Publication and remaining gates are recorded in [STATUS.md](STATUS.md); building locally does not mean a GitHub Release exists.
+Publication receipts and the exact verification scope are recorded in [STATUS.md](STATUS.md). Building locally alone does not mean a GitHub Release exists or that every runtime environment is certified.

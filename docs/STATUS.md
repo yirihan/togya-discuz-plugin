@@ -4,6 +4,10 @@
 
 Program version: **`1.0.0-x5`**. The owner explicitly confirms that the authoritative local behavior has already been discussed and actually tested, and requests anonymization/portability only, without another behavior redesign or repeated end-to-end acceptance.
 
+Published [v1.0.0-x5](https://github.com/yirihan/togya-discuz-plugin/releases/tag/v1.0.0-x5), confirmed as GitHub latest release, not draft/prerelease. Source commit: `1a80a772b96351486a25b0589b97ec984d0299dd`. ZIP SHA-256: `e8b8e6363434f913caec8ba026346ebf6b265de30070155937e8adab1375697f`.
+
+Linux extraction and a fresh GitHub download verify 252 entries/251 payload hashes and zero Apple sidecars. All 250 actual payload blobs match the source commit, including 231 upload files. Repository visibility PUBLIC and SPDX 0BSD were read back. This receipt is a later documentation update; immutable release assets are unchanged.
+
 This version retains the original account, six-task, activity, interaction, reward, static-image and uninstall rules. It removes the extra closures and zero-only publication restriction introduced by experimental generic Alpha builds. See [source fidelity](SOURCE_FIDELITY.md).
 
 Release publication and exact archive/commit identities are recorded in the GitHub release notes and a subsequent receipt update. The archive's documentation is the pre-publication snapshot, not evidence that upload has already occurred.
