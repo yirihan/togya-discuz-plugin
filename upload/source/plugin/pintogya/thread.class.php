@@ -3,6 +3,7 @@ if(!defined('IN_DISCUZ') && !defined('PINTOGYA_STATIC_TEST')) { exit('Access Den
 
 require_once dirname(__FILE__).'/lib/activity_native_post.php';
 require_once __DIR__.'/lib/capabilities.php';
+require_once __DIR__.'/lib/native_composer.php';
 
 class threadplugin_pintogya {
     public $name = 'Togya';
@@ -46,29 +47,37 @@ class threadplugin_pintogya {
 
     public function newthread_submit($fid) {
         global $_G;
-        // Stock DX ignores the return value; close until its before-model adapter is verified.
         PintogyaCapabilities::assertAvailable('native_composer');
+        PintogyaNativeComposer::assertInitial((int)$fid);
         require_once dirname(__FILE__).'/lib/pintogya.php';
         pintogya_assert_post();
         $token = PintogyaActivityNativePost::actionToken($_POST);
-        return $this->activityThread()->prepare((int)$_G['uid'], (int)$fid, $token,
-            pintogya_session_digest(), (int)TIMESTAMP);
+        $session=pintogya_session_digest();
+        $prepared=$this->activityThread()->prepare((int)$_G['uid'],(int)$fid,$token,$session,(int)TIMESTAMP);
+        PintogyaNativeComposer::attach((int)$fid,$token,$prepared,$session,(int)TIMESTAMP);
+        return $prepared;
     }
 
     public function newthread_submit_end($fid, $tid) {
         global $_G;
         if((int)$tid < 1) { return null; }
         PintogyaCapabilities::assertAvailable('native_composer');
+        PintogyaNativeComposer::context((int)$fid);
         require_once dirname(__FILE__).'/lib/pintogya.php';
         $token = PintogyaActivityNativePost::actionToken($_POST);
+        $session=pintogya_session_digest();
+        $container=PintogyaNativeComposer::assertCompletion((int)$fid,(int)$tid,$token,$session);
         $draft = $this->activityThread()->attachDraft((int)$_G['uid'], (int)$fid, $token,
-            pintogya_session_digest(), (int)$tid, (int)TIMESTAMP);
-        if($draft['state_code'] === 'active') { return 1; }
+            $session,(int)$tid,(int)TIMESTAMP);
+        $thread=DB::fetch_first('SELECT displayorder FROM %t WHERE tid=%d',array('forum_thread',(int)$tid));
+        if(!$thread)throw new RuntimeException('activity_thread_mismatch');
+        if($draft['state_code'] === 'active') { return (int)$thread['displayorder']===-2 ? -1 : 1; }
         if(!function_exists('threadpubsave')) { require_once libfile('function/forum'); }
-        $publication = threadpubsave((int)$tid);
+        $publication = (int)$thread['displayorder']===-2 ? -1 : threadpubsave((int)$tid);
         if($publication !== 1 && $publication !== -1) { throw new RuntimeException('activity_native_publish_failed'); }
         $this->activityThread()->markPublished((int)$_G['uid'], (int)$fid, $token,
-            pintogya_session_digest(), (int)$tid, $publication, (int)TIMESTAMP);
+            $session,(int)$tid,$publication,(int)TIMESTAMP);
+        $container->param('save',0);
         return $publication;
     }
 

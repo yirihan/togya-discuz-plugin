@@ -6,7 +6,7 @@
 
 Togya Plugin is a developing integration between Discuz X5 forums and [Togya](https://togya.com). It is designed to connect forum accounts, turn supported Togya activities into forum topics, and show authorized progress inside the community.
 
-**Development Alpha: `1.0.0-alpha.4-x5`, not an RC or a production-supported release.** See the [Alpha package and checksum](https://github.com/yirihan/togya-discuz-plugin/releases/tag/v1.0.0-alpha.4-x5) and [upgrade notes](docs/UPGRADING.md). Alpha.3 has a known stock-DX activity-marker incompatibility; do not use it to evaluate activity-topic display.
+**Development source: `1.0.0-alpha.5-x5` (unreleased); latest downloadable Alpha: `1.0.0-alpha.4-x5`. Neither is an RC or a production-supported release.** See the [Alpha package and checksum](https://github.com/yirihan/togya-discuz-plugin/releases/tag/v1.0.0-alpha.4-x5) and [upgrade notes](docs/UPGRADING.md). Alpha.3 has a known stock-DX activity-marker incompatibility; do not use it to evaluate activity-topic display.
 
 The [operator guide](docs/INSTALL.md) covers intended installation, key management, maintenance, upgrade and uninstall behavior. Use a disposable complete DX X5 instance; no production installation is certified.
 
@@ -15,7 +15,7 @@ The [operator guide](docs/INSTALL.md) covers intended installation, key manageme
 | Capability | Intended behavior | Standalone release status |
 | --- | --- | --- |
 | Account linking | Session-bound QR approval and encrypted credentials; unlink safely | Native SQL with synthetic provider passed; real camera/provider approval not run |
-| Activity topics | Native forum topics with authorized Togya content | Admin example model tested with synthetic source/zero rewards; stock view dispatch verified. Member composer is frontend/backend-closed pending its stock-hook adapter |
+| Activity topics | Native forum topics with authorized Togya content | Alpha.4 closes the member composer. Unreleased source adds a stock before-model adapter: eight native-model scenarios pass with synthetic sessions/source and zero rewards; full controller HTTP, browser and real approval remain unverified |
 | Progress display | Authorized stages and check-ins through PC and Touch views | Native HTML/access and cached-renderer subsets passed; visual/full media QA remains |
 | Background synchronization | Thread display reads local caches, without synchronous Togya calls | Enabled CLI cached an anonymous live public example; process locking/batch/status checked. Member synchronization not certified |
 | Native tasks and interactions | Optional task checks and native discussion/rating integration | Separate integration gate; not promised as drop-in |

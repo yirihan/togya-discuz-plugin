@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.0-alpha.5-x5 (Unreleased)
+
+- Add a stock DX before-model adapter for ordinary-member activity publication without replacing official core files. Bind canonical body, draft state, owner/session and completion to the same native model instance; ignore untrusted editor/funding/attachment fields.
+- Preserve native moderation instead of automatically approving moderated topics. Duplicate completion does not repeat publication.
+- Reject nonzero or legacy publication reward rules while credit-grant support remains disabled; zero-reward activity publication is the only candidate path.
+- Eight native model/repository scenarios and 17 assertions pass with synthetic session/source and savepoint-adapted commits. This is not full controller HTTP, browser, real QR approval, native commit or payout proof. No Alpha.5 download has been published.
+
 ## 1.0.0-alpha.4-x5
 
 - Fix the activity-message trailer to contain exactly the stock DX plugin identifier `pintogya`; keep the reservation digest outside that trailer. No official core replacement.

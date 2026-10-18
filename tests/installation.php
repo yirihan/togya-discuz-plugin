@@ -100,11 +100,23 @@ check(PintogyaActivityNativePost::digestFromMessage($message)===$digest,'native_
 check(PintogyaActivityNativePost::digestFromMessage(PintogyaActivityNativePost::MARKER_PREFIX.$digest)===$digest,'legacy_marker_recognition');
 check(PintogyaActivityNativePost::digestFromMessage($message.'extra')===null,'marker_closed_suffix');
 require_once $root.'/thread.class.php';
-rejects(static function(){(new threadplugin_pintogya())->newthread_submit(1);},'unverified_member_composer_closed','extension_not_verified');
-rejects(static function(){(new threadplugin_pintogya())->newthread_submit_end(1,1);},'unverified_member_composer_completion_closed','extension_not_verified');
+check(PintogyaCapabilities::available('native_composer')===true,'native_composer_adapter_available');
+rejects(static function(){(new threadplugin_pintogya())->newthread_submit(1);},'composer_requires_native_controller','activity_native_context_required');
+rejects(static function(){(new threadplugin_pintogya())->newthread_submit_end(1,1);},'completion_requires_native_controller','activity_native_context_required');
+PintogyaCapabilities::assertPublicationRule(array('total'=>0));check(true,'zero_reward_publication_allowed');
+rejects(static function(){PintogyaCapabilities::assertPublicationRule(array('total'=>1));},'paid_publication_stays_closed','extension_not_verified');
+rejects(static function(){PintogyaCapabilities::assertPublicationRule(null);},'legacy_paid_publication_stays_closed','extension_not_verified');
 require_once $root.'/lib/activity_api.php';
+$apiBinding=new class {
+    public function latestChallenge(...$args){return array('state'=>'approved','approvedAt'=>10);}
+    public function pollLatest(...$args){return true;}
+};
+$apiReader=new class {public function ownedPublicActivities(...$args){return array(array('id'=>'10000000-0000-4000-8000-000000000001'));}};
+$apiPublisher=new class {public function issue(...$args){return array('token'=>str_repeat('a',43),'expiresAt'=>20,'activity'=>array('id'=>'10000000-0000-4000-8000-000000000001'));}};
+$composerApi=new PintogyaActivityApi($apiBinding,$apiReader,$apiPublisher,static function(){return '';});
 foreach(array('start','poll','list','select')as$operation) {
-    rejects(static function()use($operation){(new PintogyaActivityApi(null,null,null,static function(){return '';}))->execute($operation,1,1,hash('sha256','synthetic-session'),'en-US',1);},'unverified_composer_api_closed','extension_not_verified');
+    $response=$composerApi->execute($operation,1,1,hash('sha256','synthetic-session'),'en-US',10,'10000000-0000-4000-8000-000000000001');
+    check(is_array($response)&&($operation==='list'?count($response['activities'])===1:($operation==='select'?strlen($response['token'])===43:$response['state']==='approved')),'composer_api_'.$operation);
 }
 $xml=simplexml_load_file($root.'/discuz_plugin_pintogya.xml');
 $data=$xml->xpath('item[@id="Data"]/item[@id="plugin"]')[0];
