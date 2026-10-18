@@ -5,7 +5,6 @@ require_once __DIR__.'/repository.php';
 require_once __DIR__.'/activity_settings.php';
 require_once __DIR__.'/activity_reward_math.php';
 require_once __DIR__.'/activity_native_credit_entry.php';
-require_once __DIR__.'/capabilities.php';
 
 final class PintogyaActivitySettlement {
     const RECEIPT_MAX_AGE = 300;
@@ -68,12 +67,10 @@ final class PintogyaActivitySettlement {
     }
 
     public static function settle($activityPk, $uid, $now) {
-        PintogyaCapabilities::assertAvailable('rewards');
         return self::settleInternal($activityPk, $uid, $now, null);
     }
 
     public static function settleTimeout($reviewPk, $evidence) {
-        PintogyaCapabilities::assertAvailable('rewards');
         self::assertSettlementEnabled();
         self::number($reviewPk, 1, PHP_INT_MAX, 'settlement_review_invalid');
         if(!is_object($evidence) || !method_exists($evidence, 'observe')) {
@@ -377,7 +374,6 @@ final class PintogyaActivitySettlement {
     }
 
     private static function assertSettlementEnabled() {
-        PintogyaCapabilities::assertAvailable('rewards');
         global $_G;
         if((string)($_G['setting']['pintogya_activity_settlement_enabled'] ?? '0') !== '1') {
             throw new RuntimeException('reward_settlement_disabled');

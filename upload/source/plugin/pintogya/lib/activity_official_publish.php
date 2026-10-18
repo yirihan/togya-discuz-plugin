@@ -102,7 +102,6 @@ final class PintogyaActivityOfficialPublish {
                 $input=$defaults; unset($input['version']);
                 $defaults=PintogyaActivityInstantRule::fromInput($input,$this->credits);
                 $rule=PintogyaActivityInstantRule::snapshot($defaults,$activity);
-                PintogyaCapabilities::assertPublicationRule($rule);
                 $source=array('schema'=>2,'kind'=>'official-reference','admin_uid'=>$adminUid,
                     'publisher_uid'=>$uid,'fid'=>$this->fid,'reference'=>$snapshot);
                 $this->repo->insertActivity(array('activity_id'=>$activity['id'],'fid'=>$this->fid,

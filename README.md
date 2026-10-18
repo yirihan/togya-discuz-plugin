@@ -6,7 +6,9 @@
 
 Togya Plugin is a developing integration between Discuz X5 forums and [Togya](https://togya.com). It is designed to connect forum accounts, turn supported Togya activities into forum topics, and show authorized progress inside the community.
 
-**Experimental source candidate: `1.0.0-alpha.7-x5`, not an RC or a production-supported release.** Downloadable artifacts and checksums, when published, are listed on [GitHub Releases](https://github.com/yirihan/togya-discuz-plugin/releases). See the [synthetic UI previews](docs/PREVIEW.md) and [upgrade notes](docs/UPGRADING.md). Alpha.6 and earlier can expose member-image caches through static URLs after synchronization: do not use them with real private content. Alpha.7 protects new member images and retires verified legacy mirrors; missing legacy identity records require operator review before reuse.
+**Latest downloadable experimental candidate: `1.0.0-alpha.7-x5`, not an RC or a production-supported release.** Downloadable artifacts and checksums, when published, are listed on [GitHub Releases](https://github.com/yirihan/togya-discuz-plugin/releases). See the [synthetic UI previews](docs/PREVIEW.md) and [upgrade notes](docs/UPGRADING.md). Alpha.6 and earlier can expose member-image caches through static URLs after synchronization: do not use them with real private content. Alpha.7 protects new member images and retires verified legacy mirrors; missing legacy identity records require operator review before reuse.
+
+The unpublished Alpha.8 working source is being aligned with the authoritative local feature/rule set: anonymization and DX portability only, not feature removal. Historical Alpha restrictions are not the final feature contract; see [current status](docs/STATUS.md).
 
 The [operator guide](docs/INSTALL.md) covers intended installation, key management, maintenance, upgrade and uninstall behavior. Use a disposable complete DX X5 instance; no production installation is certified.
 

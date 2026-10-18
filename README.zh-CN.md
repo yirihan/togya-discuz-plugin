@@ -6,7 +6,9 @@
 
 Togya Plugin 是面向 Discuz X5 的 [Togya](https://togya.com) 集成插件，计划提供账号连接、活动主题、阶段进度及经授权的打卡展示，通过后台同步将内容保留在论坛本地。
 
-**当前实验源码候选为 `1.0.0-alpha.7-x5`，不是 RC 或生产就绪版本。** 实际下载包及校验文件以 [GitHub Releases](https://github.com/yirihan/togya-discuz-plugin/releases) 为准。另见[合成界面预览](docs/PREVIEW.md)及[升级说明](docs/UPGRADING.md)。Alpha.6 及更早候选同步后可能把会员图片暴露在静态地址，不要用于真实私有内容。Alpha.7 保护新图片并按证据清理已知旧副本；旧身份记录丢失时仍须人工核对，不能直接认定升级后安全。
+**最新可下载实验候选为 `1.0.0-alpha.7-x5`，不是 RC 或生产就绪版本。** 实际下载包及校验文件以 [GitHub Releases](https://github.com/yirihan/togya-discuz-plugin/releases) 为准。另见[合成界面预览](docs/PREVIEW.md)及[升级说明](docs/UPGRADING.md)。Alpha.6 及更早候选同步后可能把会员图片暴露在静态地址，不要用于真实私有内容。Alpha.7 保护新图片并按证据清理已知旧副本；旧身份记录丢失时仍须人工核对，不能直接认定升级后安全。
+
+未发布的 Alpha.8 工作源码正在按本地权威实现核对功能与规则：只做脱敏和 DX 通用性适配，不删减功能。旧 Alpha 的关闭开关不代表最终功能范围，具体见[当前状态](docs/STATUS.md)。
 
 [安装与维护草案](docs/INSTALL.zh-CN.md)说明预期安装、密钥、后台同步、升级和卸载方式，不代表相关门禁已经通过。
 

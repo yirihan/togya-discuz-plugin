@@ -1,6 +1,5 @@
 <?php
 if(!defined('IN_DISCUZ') && !defined('PINTOGYA_STATIC_TEST')) { exit('Access Denied'); }
-require_once __DIR__.'/capabilities.php';
 
 final class PintogyaActivityApi {
     public static function publicForumAllowsRoster($row) {
@@ -24,7 +23,6 @@ final class PintogyaActivityApi {
     }
 
     public function execute($operation, $uid, $fid, $sessionDigest, $locale, $now, $activityId = '') {
-        PintogyaCapabilities::assertAvailable('native_composer');
         if(!is_int($uid) || $uid < 1 || !is_int($fid) || $fid < 1 ||
             !is_string($sessionDigest) || !preg_match('/^[0-9a-f]{64}$/D', $sessionDigest) ||
             !is_string($locale) || !preg_match('/^[a-z]{2}(?:-[A-Z]{2})?$/D', $locale) ||

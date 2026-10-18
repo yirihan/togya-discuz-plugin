@@ -12,7 +12,6 @@ function pintogya_native_result($complete) {
 }
 
 function pintogya_native_services() {
-    PintogyaCapabilities::assertAvailable('native_tasks');
     if(defined('PINTOGYA_STATIC_TEST') && isset($GLOBALS['PINTOGYA_NATIVE_TEST_SERVICES'])) {
         return $GLOBALS['PINTOGYA_NATIVE_TEST_SERVICES'];
     }

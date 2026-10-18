@@ -14,8 +14,6 @@ try {
     pintogya_assert_post();
     $operation = $_GET['op'] ?? '';
     if(!is_string($operation)) { throw new InvalidArgumentException('activity_request_invalid'); }
-    if($operation==='publication_resume') { PintogyaCapabilities::assertAvailable('native_composer'); }
-    if(strncmp($operation,'review_',7) === 0) { PintogyaCapabilities::assertAvailable('native_interactions'); }
     if(in_array($operation,array('public_card','viewer','reward_status','participants','stage_feed','stage_image',
         'public_stage_feed','public_stage_image','public_comments','interaction_prepare','review_status','review_queue'),true)) {
         if(!defined('PINTOGYA_DISPLAY_REQUEST')) { define('PINTOGYA_DISPLAY_REQUEST',true); }

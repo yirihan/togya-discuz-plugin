@@ -1,7 +1,6 @@
 <?php
 if(!defined('IN_DISCUZ') && !defined('PINTOGYA_STATIC_TEST')) { exit('Access Denied'); }
 require_once __DIR__.'/crypto.php';
-require_once __DIR__.'/capabilities.php';
 
 final class PintogyaCheckinInteractions {
     private $thread;private $public;private $store;private $member;
@@ -73,7 +72,6 @@ final class PintogyaCheckinInteractions {
     }
 
     public function prepare($actorUid,$tid,$stageId,$checkinId,$cursor,$locale,$action,$now) {
-        PintogyaCapabilities::assertAvailable('native_interactions');
         if(!is_int($actorUid)||$actorUid<1||!is_int($now)||$now<1||!in_array($action,array('comment','rate'),true)) {
             throw new InvalidArgumentException('checkin_interaction_input_invalid');
         }
@@ -125,7 +123,6 @@ final class PintogyaCheckinInteractions {
 
     public static function capabilities($actorUid,$ownerUid) {
         global $_G;
-        if(!PintogyaCapabilities::available('native_interactions')) { return array('comment'=>false,'rate'=>false); }
         $comment=$actorUid>0 && in_array((int)($_G['group']['allowcommentpost']??0),array(2,3),true)
             && ($actorUid!==$ownerUid || !empty($_G['setting']['commentpostself'])) && !empty($_G['setting']['commentnumber']);
         $rate=$actorUid>0 && $actorUid!==$ownerUid && !empty($_G['group']['raterange']);

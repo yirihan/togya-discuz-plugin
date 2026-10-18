@@ -2,7 +2,6 @@
 if(!defined('IN_DISCUZ') && !defined('PINTOGYA_STATIC_TEST')) { exit('Access Denied'); }
 
 require_once dirname(__FILE__).'/lib/activity_native_post.php';
-require_once __DIR__.'/lib/capabilities.php';
 require_once __DIR__.'/lib/native_composer.php';
 
 class threadplugin_pintogya {
@@ -15,9 +14,6 @@ class threadplugin_pintogya {
         require_once dirname(__FILE__).'/lib/native_task.php';
         $lang = pintogya_lang_pack();
         $escape = static function($value) { return htmlspecialchars((string)$value, ENT_QUOTES, 'UTF-8'); };
-        if(!PintogyaCapabilities::available('native_composer')) {
-            return '<p class="pintogya-activity-unavailable" role="status">'.$escape($lang['activity_view_unavailable']).'</p>';
-        }
         $labels = array('connecting', 'pending', 'ready', 'loading', 'empty', 'selected', 'expired',
             'error', 'mapped', 'select', 'publishing');
         $attributes = '';
@@ -47,7 +43,6 @@ class threadplugin_pintogya {
 
     public function newthread_submit($fid) {
         global $_G;
-        PintogyaCapabilities::assertAvailable('native_composer');
         PintogyaNativeComposer::assertInitial((int)$fid);
         require_once dirname(__FILE__).'/lib/pintogya.php';
         pintogya_assert_post();
@@ -61,7 +56,6 @@ class threadplugin_pintogya {
     public function newthread_submit_end($fid, $tid) {
         global $_G;
         if((int)$tid < 1) { return null; }
-        PintogyaCapabilities::assertAvailable('native_composer');
         PintogyaNativeComposer::context((int)$fid);
         require_once dirname(__FILE__).'/lib/pintogya.php';
         $token = PintogyaActivityNativePost::actionToken($_POST);

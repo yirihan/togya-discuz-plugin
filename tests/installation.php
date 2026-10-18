@@ -86,12 +86,12 @@ $_G['config']['db']['map']=array('common_setting'=>'external');rejects(static fu
 foreach(array('https://user:pass@forum.example.org/','http://forum.example.org/','https://forum.example.org/app/') as $origin) {
     rejects(static function() use($origin){ PintogyaSiteProfile::hostFromSettings(array('siteurl'=>$origin)); },'unsafe_origin');
 }
-rejects(static function(){ PintogyaActivityInstantSettlement::grant(null,null,null); },'unverified_reward_backend_closed','extension_not_verified');
-rejects(static function(){ (new PintogyaCheckinInteractions(null,null,null))->prepare(0,0,'','','','','comment',0); },'unverified_interaction_backend_closed','extension_not_verified');
-check(PintogyaCheckinInteractions::capabilities(1,2)===array('comment'=>false,'rate'=>false),'unverified_buttons_closed');
+check(PintogyaCheckinInteractions::capabilities(0,2)===array('comment'=>false,'rate'=>false),'guest_native_buttons_closed');
+$_G['group']=array('allowcommentpost'=>2,'raterange'=>array(1=>array('min'=>1,'max'=>1)));
+$_G['setting']['commentnumber']=10;
+check(PintogyaCheckinInteractions::capabilities(1,2)===array('comment'=>true,'rate'=>true),'native_group_permissions_preserved');
 require_once $root.'/lib/native_task.php';
-rejects(static function(){ pintogya_native_services(); },'unverified_tasks_closed','extension_not_verified');
-check(PintogyaMaintenance::execute('pintogya.instant_rewards',5)===array('skipped'=>'extension_not_verified'),'unverified_reward_worker_closed');
+check(PintogyaMaintenance::execute('pintogya.instant_rewards',5)===array('skipped'=>'plugin_disabled'),'disabled_reward_worker_preserved');
 check(PintogyaMaintenance::execute('pintogya.display_cache',5)===array('skipped'=>'plugin_disabled'),'disabled_worker_no_source');
 check(count(pintogya_verified_install_migrations())===8,'migration_hash_integrity');
 $digest=hash('sha256','synthetic-native-marker');$message=PintogyaActivityNativePost::messageForDigest($digest);
@@ -114,12 +114,8 @@ $postlist[9]['first']=0;
 check(!PintogyaActivityNativePost::hideRenderedMarker(12)&&$postlist[9]['message']!=='','reply_body_not_hidden');
 unset($postlist,$_G['forum_firstpid']);
 require_once $root.'/thread.class.php';
-check(PintogyaCapabilities::available('native_composer')===true,'native_composer_adapter_available');
 rejects(static function(){(new threadplugin_pintogya())->newthread_submit(1);},'composer_requires_native_controller','activity_native_context_required');
 rejects(static function(){(new threadplugin_pintogya())->newthread_submit_end(1,1);},'completion_requires_native_controller','activity_native_context_required');
-PintogyaCapabilities::assertPublicationRule(array('total'=>0));check(true,'zero_reward_publication_allowed');
-rejects(static function(){PintogyaCapabilities::assertPublicationRule(array('total'=>1));},'paid_publication_stays_closed','extension_not_verified');
-rejects(static function(){PintogyaCapabilities::assertPublicationRule(null);},'legacy_paid_publication_stays_closed','extension_not_verified');
 require_once $root.'/lib/activity_api.php';
 $apiBinding=new class {
     public function latestChallenge(...$args){return array('state'=>'approved','approvedAt'=>10);}

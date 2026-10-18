@@ -1,6 +1,5 @@
 <?php
 if(!defined('IN_DISCUZ') && !defined('PINTOGYA_STATIC_TEST')) { exit('Access Denied'); }
-require_once __DIR__.'/capabilities.php';
 require_once __DIR__.'/activity_instant_rule.php';
 require_once __DIR__.'/activity_official_examples.php';
 require_once __DIR__.'/activity_settings.php';
@@ -60,7 +59,6 @@ final class PintogyaActivityInstantConfig {
                 throw new InvalidArgumentException('instant_operation_invalid');
             }
             if($input[$operation] === '1') {
-                if($operation === 'payment') { PintogyaCapabilities::assertAvailable('rewards'); }
                 foreach(self::requiredTables($operation) as $logical) {
                     if(($tables[$logical] ?? false) !== true) { throw new RuntimeException('instant_operation_schema_unavailable'); }
                 }

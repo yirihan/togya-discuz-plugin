@@ -5,7 +5,6 @@ require_once __DIR__.'/activity_reward_math.php';
 require_once __DIR__.'/activity_native_post.php';
 require_once __DIR__.'/activity_instant_rule.php';
 require_once __DIR__.'/site_profile.php';
-require_once __DIR__.'/capabilities.php';
 
 final class PintogyaActivityPublish {
     private $repo;
@@ -60,7 +59,6 @@ final class PintogyaActivityPublish {
         $activity = $this->ownedActivity($uid, $activityId);
         $this->assertOwner($binding, $activity);
         $instantRule = $this->instant ? PintogyaActivityInstantRule::snapshot($this->instantDefaults, $activity) : null;
-        PintogyaCapabilities::assertPublicationRule($instantRule);
         $token = PintogyaCrypto::b64urlEncode(random_bytes(32));
         $digest = $this->actionDigest($token);
         $expires = $now + 300;
@@ -315,10 +313,8 @@ final class PintogyaActivityPublish {
     private function checkedReward($digest, $activity, $lock) {
         if($this->instant) {
             $row = $this->repo->activityInstantRuleById($activity['id'], $lock);
-            $rule=$this->assertInstantRule($row,$activity);PintogyaCapabilities::assertPublicationRule($rule);
-            return array($row,$rule);
+            return array($row, $this->assertInstantRule($row, $activity));
         }
-        PintogyaCapabilities::assertAvailable('rewards');
         $row = $this->repo->activityRewardRuleByDigest($digest, $lock);
         return array($row, $this->assertRewardRule($row, $digest, $activity['id']));
     }

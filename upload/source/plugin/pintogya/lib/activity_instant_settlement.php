@@ -3,7 +3,6 @@ if(!defined('IN_DISCUZ') && !defined('PINTOGYA_STATIC_TEST')) { exit('Access Den
 require_once __DIR__.'/repository.php';
 require_once __DIR__.'/activity_instant_rule.php';
 require_once __DIR__.'/activity_native_credit_entry.php';
-require_once __DIR__.'/capabilities.php';
 
 final class PintogyaActivityInstantSettlement {
     public static function establish($site, $candidate, $rule) {
@@ -72,7 +71,6 @@ final class PintogyaActivityInstantSettlement {
     }
 
     public static function grant($site, $rewardPk, $now) {
-        PintogyaCapabilities::assertAvailable('rewards');
         global $_G;
         self::assertSite($site);
         if((string)($_G['setting'][PintogyaActivityInstantRule::ENABLED_KEY] ?? '') !== '1') {

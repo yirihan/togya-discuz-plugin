@@ -1,7 +1,6 @@
 <?php
 if(!defined('IN_DISCUZ') && !defined('PINTOGYA_STATIC_TEST')) { exit('Access Denied'); }
 require_once __DIR__.'/installation.php';
-require_once __DIR__.'/capabilities.php';
 require_once __DIR__.'/maintenance_runner.php';
 
 final class PintogyaMaintenance {
@@ -13,10 +12,10 @@ final class PintogyaMaintenance {
             'pintogya.public_cover'=>array('interval'=>300, 'file'=>'activity_cover_worker.php', 'class'=>'PintogyaActivityCoverWorker'),
             'pintogya.membership_reconcile'=>array('interval'=>300, 'file'=>'activity_membership_worker.php', 'class'=>'PintogyaActivityMembershipWorker'),
             'pintogya.session_keepalive'=>array('interval'=>300, 'file'=>'session_keepalive.php', 'class'=>'PintogyaSessionKeepalive'),
-            'pintogya.instant_rewards'=>array('interval'=>300, 'file'=>'activity_instant_worker.php', 'class'=>'PintogyaActivityInstantWorker', 'capability'=>'rewards'),
-            'pintogya.review_timeout'=>array('interval'=>300, 'file'=>'activity_review_worker.php', 'class'=>'PintogyaActivityReviewWorker', 'capability'=>'native_interactions'),
-            'pintogya.reward_promotion'=>array('interval'=>300, 'file'=>'activity_reward_promotion_worker.php', 'class'=>'PintogyaActivityRewardPromotionWorker', 'capability'=>'rewards'),
-            'pintogya.reward_topup'=>array('interval'=>300, 'file'=>'activity_topup_worker.php', 'class'=>'PintogyaActivityTopupWorker', 'capability'=>'rewards'),
+            'pintogya.instant_rewards'=>array('interval'=>300, 'file'=>'activity_instant_worker.php', 'class'=>'PintogyaActivityInstantWorker'),
+            'pintogya.review_timeout'=>array('interval'=>300, 'file'=>'activity_review_worker.php', 'class'=>'PintogyaActivityReviewWorker'),
+            'pintogya.reward_promotion'=>array('interval'=>300, 'file'=>'activity_reward_promotion_worker.php', 'class'=>'PintogyaActivityRewardPromotionWorker'),
+            'pintogya.reward_topup'=>array('interval'=>300, 'file'=>'activity_topup_worker.php', 'class'=>'PintogyaActivityTopupWorker'),
         );
     }
 
@@ -26,9 +25,6 @@ final class PintogyaMaintenance {
             throw new InvalidArgumentException('maintenance_arguments_invalid');
         }
         $definition = self::tasks()[$task];
-        if(!empty($definition['capability']) && !PintogyaCapabilities::available($definition['capability'])) {
-            return array('skipped'=>'extension_not_verified');
-        }
         if(function_exists('loadcache')) { loadcache('plugin'); }
         if((string)($_G['cache']['plugin']['pintogya']['enabled'] ?? '') !== '1' ||
             (int)DB::result_first('SELECT available FROM %t WHERE identifier=%s', array('common_plugin','pintogya')) !== 1) {
@@ -73,7 +69,6 @@ final class PintogyaMaintenance {
         try {
             $state = self::status(); $done = array();
             foreach(self::tasks() as $task=>$definition) {
-                if(!empty($definition['capability']) && !PintogyaCapabilities::available($definition['capability'])) { continue; }
                 if(time() - (int)($state[$task]['finished_at'] ?? 0) < $definition['interval']) { continue; }
                 $remaining = (int)floor(55 - (hrtime(true) / 1000000000 - $started));
                 if(count($done) >= 2 || $remaining < 2) { break; }

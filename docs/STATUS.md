@@ -1,6 +1,10 @@
 # Release Status
 
-**Experimental source candidate: `1.0.0-alpha.7-x5`. Not an RC or a production-supported release.** Actual downloadable assets are listed on [GitHub Releases](https://github.com/yirihan/togya-discuz-plugin/releases); a local build is not a publication receipt. Alpha.6 and earlier are unsafe for real private member-image content: static copies bypass authentication. See [upgrade and legacy-copy limitations](UPGRADING.md).
+**Working source candidate: `1.0.0-alpha.8-x5`, not published. Latest downloadable candidate: Alpha.7. Neither is RC/stable or production-supported.** Actual downloadable assets are listed on [GitHub Releases](https://github.com/yirihan/togya-discuz-plugin/releases); a local build is not a publication receipt. Alpha.6 and earlier are unsafe for real private member-image content: static copies bypass authentication. See [upgrade and legacy-copy limitations](UPGRADING.md).
+
+## Source Fidelity Correction
+
+The final generic edition must preserve the authoritative local implementation's existing features and business rules. Only anonymization and necessary DX portability adaptations are in scope. Historical Alpha capability closures are not the final product contract. Alpha.8 working source removes those extra task/interaction/reward closures and the added zero-only publication restriction, while retaining native permissions, operator settings, transactions and idempotency. Twelve restored rule-method token comparisons and 47 portable checks pass; this does not establish full-plugin parity or executed payments. Native task packaging, anonymized guide assets and remaining adaptation differences are still under review. The historical ledger below describes immutable older candidates and is not acceptance of the expanded working source. No Alpha.8 download is published.
 
 | Stage | Status | Evidence / next gate |
 | --- | --- | --- |

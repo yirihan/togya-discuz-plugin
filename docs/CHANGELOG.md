@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.0-alpha.8-x5 (Unpublished Working Source)
+
+- Align with the authoritative local feature/rule set: remove added capability closures for native tasks, interactions and rewards, and the added zero-only publication restriction. Native permission/configuration, transaction and idempotency checks remain.
+- Twelve restored rule-method bodies match authority PHP tokens exactly (comments/whitespace ignored); 47 portable checks and 14 changed/new PHP syntax checks pass. This is scoped parity evidence, not full-plugin equivalence or payout execution proof.
+- Remaining native-task packaging, guide-asset anonymization and other portability differences are under review. No Alpha.8 archive is published. Historical Alpha evidence/disabled-feature behavior is retained as history, not the final feature contract.
+
 ## 1.0.0-alpha.7-x5 (Experimental Source Candidate)
 
 - Security: member images are no longer materialized in public attachment storage or advertised with static URLs. Reads use the existing authenticated, CSRF-protected native endpoint and same-origin POST; public images retain their normal static behavior.
