@@ -26,7 +26,7 @@ function ruleTokens($path,$name) {
     return $found;
 }
 $scope=array(
-    'lib/native_task.php'=>array('pintogya_native_services'),
+    'lib/native_task.php'=>array('pintogya_native_services','pintogya_native_render_guide'),
     'lib/activity_api.php'=>array('execute'),
     'lib/checkin_interactions.php'=>array('prepare','capabilities'),
     'lib/activity_instant_config.php'=>array('operationChanges'),
@@ -42,5 +42,5 @@ try {
         $cases[]=array('file'=>$file,'symbol'=>$name,'matched'=>$same);$passed=$passed&&$same;
     }
 }catch(Throwable $error){$passed=false;$cases[]=array('error'=>'rule_comparison_failed');}
-echo json_encode(array('passed'=>$passed,'cases'=>$cases,'scope'=>'Exact PHP tokens for twelve restored rule methods; ignores comments/whitespace only. Not complete plugin parity, authorization execution or payout proof.')).PHP_EOL;
+echo json_encode(array('passed'=>$passed,'cases'=>$cases,'scope'=>'Exact PHP tokens for restored rule/guide methods; ignores comments/whitespace only. Not complete plugin parity, authorization execution or payout proof.')).PHP_EOL;
 exit($passed?0:1);

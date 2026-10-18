@@ -193,11 +193,35 @@ function pintogya_native_progress_form($taskId, $taskKey, $lang, $interval = 150
 }
 
 function pintogya_native_render_guide($taskKey, $lang) {
-    if($taskKey !== 'bind_daily') { return ''; }
-    return '<section class="pintogya-task-guide"><h4>'.dhtmlspecialchars($lang['task_guide_label']).'</h4>'
-        .'<ol><li>'.dhtmlspecialchars($lang['task_guide_step_me']).'</li>'
-        .'<li>'.dhtmlspecialchars($lang['task_guide_step_scan']).'</li></ol>'
-        .'<p>'.dhtmlspecialchars($lang['task_guide_same_phone']).'</p></section>';
+    $base = 'source/plugin/pintogya/static/images/task-guides/';
+    $version = '2.0.24-x5';
+    if($taskKey !== 'bind_daily') {
+        $guides = array(
+            'youtube_connected' => array('youtube-connected.webp', 480, 904),
+            'youtube_import_public' => array('youtube-import-public.webp', 480, 1038),
+            'youtube_import_three_participants' => array('youtube-three-participants.webp', 480, 1038),
+            'answer_other_question' => array('answer-question.webp', 480, 1041),
+            'created_activity_three_completions' => array('three-completions.webp', 480, 1012),
+        );
+        $altKey = 'task_guide_alt_'.$taskKey;
+        if(!isset($guides[$taskKey], $lang[$altKey])) { return ''; }
+        $guide = $guides[$taskKey];
+        return '<section class="pintogya-task-guide pintogya-task-guide-single"><h4>'.dhtmlspecialchars($lang['task_guide_label']).'</h4>'
+            .'<figure class="pintogya-guide-step"><img src="'.dhtmlspecialchars($base.$guide[0].'?'.$version).'" alt="'.dhtmlspecialchars($lang[$altKey]).'" width="'.intval($guide[1]).'" height="'.intval($guide[2]).'" loading="lazy" decoding="async" />'
+            .'<figcaption class="xg1">'.dhtmlspecialchars($lang['task_guide_note']).'</figcaption></figure></section>';
+    }
+    // TOGYA_PLUGIN: pintogya_ios_scanner_guide / pintogya_ios_fullscreen_guide -- uncropped iOS Home.
+    $version = '2.0.27-x5';
+    $html = '<section class="pintogya-task-guide pintogya-task-guide-ios"><h4>'.dhtmlspecialchars($lang['task_guide_label']).'</h4>';
+    $html .= '<figure class="pintogya-guide-step pintogya-guide-step-shortcut"><div class="pintogya-guide-shot">'
+        .'<img src="'.dhtmlspecialchars($base.'togya-ios-scan-shortcut-full.webp?'.$version).'" alt="'.dhtmlspecialchars($lang['task_guide_alt_me']).'" width="640" height="1385" loading="lazy" decoding="async" />'
+        .'<span class="pintogya-guide-ring" aria-hidden="true"></span>'
+        .'</div></figure>';
+    $html .= '<ol class="pintogya-guide-instructions"><li>'.dhtmlspecialchars($lang['task_guide_step_me']).'</li>'
+        .'<li>'.dhtmlspecialchars($lang['task_guide_step_scan']).'</li></ol>';
+    $html .= '<p class="pintogya-guide-same-phone">'.dhtmlspecialchars($lang['task_guide_same_phone']).'</p>';
+    $html .= '<p class="xg1 pintogya-guide-note">'.dhtmlspecialchars($lang['task_guide_note']).'</p></section>';
+    return $html;
 }
 
 function pintogya_native_render_platform_links($lang) {

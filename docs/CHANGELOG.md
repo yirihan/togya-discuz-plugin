@@ -4,7 +4,9 @@
 
 - Align with the authoritative local feature/rule set: remove added capability closures for native tasks, interactions and rewards, and the added zero-only publication restriction. Native permission/configuration, transaction and idempotency checks remain.
 - Twelve restored rule-method bodies match authority PHP tokens exactly (comments/whitespace ignored); 47 portable checks and 14 changed/new PHP syntax checks pass. This is scoped parity evidence, not full-plugin equivalence or payout execution proof.
-- Remaining native-task packaging, guide-asset anonymization and other portability differences are under review. No Alpha.8 archive is published. Historical Alpha evidence/disabled-feature behavior is retained as history, not the final feature contract.
+- Restore six original task adapters (customer copyright name anonymized), the shared icon and all nine original tutorial images. Guides contain synthetic/example identities; visual review and WebP chunk inspection found no customer identifiers or EXIF/XMP. Guide rendering matches the authority's PHP tokens, increasing scoped comparisons to thirteen.
+- The packager includes only the six named task adapters/icon outside the plugin tree, refuses missing/symlinked adapters and excludes unrelated official core. Eleven packaging checks and six task-class/guide-path cases pass; native task registration/completion/payment are not claimed by these checks.
+- Other portability differences and full native task behavior remain under review. No Alpha.8 archive is published. Historical Alpha evidence/disabled-feature behavior is retained as history, not the final feature contract.
 
 ## 1.0.0-alpha.7-x5 (Experimental Source Candidate)
 

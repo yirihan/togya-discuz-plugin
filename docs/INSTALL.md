@@ -18,11 +18,15 @@ Once a release has actually passed its gates:
 
 1. Download the named release asset and verify its external SHA-256 checksum and internal manifest. A repository commit or self-built ZIP is not a supported release.
 2. Review its exact DX/PHP/database matrix and known limitations. Do not infer X3.x or subdirectory support.
-3. Upload the contents of `upload/` into the DX root. Only the plugin subtree should be added; no whole-core/config replacement is part of this package.
+3. Upload the contents of `upload/` into the DX root. The working package includes the plugin subtree, six named `source/class/task/task_togya_*.php` adapters and `static/image/task/togya.png`; no official core/config replacement is part of this package. Review existing same-named customized task files before replacing them.
 4. Install `pintogya` through the native AdminCP plugin flow. Verify the displayed name is **Togya Plugin**, the release version matches, and enablement remains off until setup is reviewed.
 5. Review DX's native basic-setting **site URL (`siteurl`)**. The candidate treats it as a trusted canonical forum origin: lower-case hostname, HTTPS, root path, no custom port, credentials, query or fragment. It is not inferred from an arbitrary incoming Host header. A different website/homepage URL is not a valid substitute for the forum origin.
 6. Review the plugin's displayed connection-request name. It identifies the request to a member; changing it does not transfer account ownership.
-7. Configure the encryption key and background worker, then explicitly enable only the verified base feature. Leave unverified native tasks/interactions/rewards closed.
+7. Configure the encryption key and background worker. Features follow their existing native permissions and operator settings; the working source does not add release-only task/interaction/reward closures. Do not deploy an unverified working candidate to production or enable payments merely as a scheduler test.
+
+### Existing Native Task Adapters
+
+The six task types are `togya_bind_daily`, `togya_youtube_connected`, `togya_youtube_import_public`, `togya_youtube_import_three_participants`, `togya_answer_other_question` and `togya_created_activity_three_completions`. Use the native AdminCP task center to configure tasks and their existing group/period/reward rules. Uploading files does not create funded tasks or grant credits. The adapters retain their original task conditions, including administrator-only restrictions where present; do not remove those conditions to make a test pass. Original tutorial images are included with their existing paths and rendering.
 8. Refresh all Discuz cache types through AdminCP, and check PC/Touch, member/guest and denied-access behavior in the isolated environment before deployment.
 
 ## Encryption Key

@@ -16,6 +16,11 @@ SECRET = re.compile(
     rb"gh[pousr]_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{30,}|AKIA[0-9A-Z]{16}"
 )
 BAD_NAMES = {"config_global.php", "config_ucenter.php", "id_rsa", "id_ed25519"}
+TASK_KEYS = ("bind_daily", "youtube_connected", "youtube_import_public",
+             "youtube_import_three_participants", "answer_other_question",
+             "created_activity_three_completions")
+OWNED_RUNTIME_FILES = tuple("source/class/task/task_togya_" + key + ".php" for key in TASK_KEYS) + (
+    "static/image/task/togya.png",)
 
 
 def validate_bytes(name, data, deny):
@@ -77,6 +82,19 @@ def build(source, output, deny):
         data = path.read_bytes()
         validate_bytes(name, data, deny)
         payload[name] = data
+    # Include only our named task adapters/icon, never official core or arbitrary upload files.
+    if source.parent.name == "plugin" and source.parent.parent.name == "source":
+        runtime = source.parent.parent.parent
+        for relative in OWNED_RUNTIME_FILES:
+            path = runtime / relative
+            if path.is_symlink() or any(parent.is_symlink() for parent in path.parents if parent != runtime.parent):
+                raise ValueError("symlink_in_runtime_payload")
+            if not path.is_file():
+                raise ValueError("missing_native_task_payload")
+            name = "upload/" + relative
+            data = path.read_bytes()
+            validate_bytes(name, data, deny)
+            payload[name] = data
     repository = Path(__file__).resolve().parent.parent
     documents = [Path(name) for name in ("README.md", "README.zh-CN.md", "LICENSE", "SECURITY.md", "CONTRIBUTING.md")]
     documents.extend(path.relative_to(repository) for path in sorted((repository / "docs").glob("*.md")))

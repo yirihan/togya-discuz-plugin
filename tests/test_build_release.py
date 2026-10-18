@@ -4,6 +4,7 @@ from pathlib import Path
 import tempfile
 import unittest
 import zipfile
+import shutil
 
 
 SPEC = importlib.util.spec_from_file_location("build_release", Path(__file__).resolve().parents[1] / "tools/build_release.py")
@@ -96,6 +97,39 @@ class ReleasePackagingTest(unittest.TestCase):
             self.assertFalse(any("._" in name for name in archive.namelist()))
             self.assertIn('"apple_metadata_omitted": 1', archive.read("PACKAGING.json").decode())
         self.assertTrue(result["sha256"])
+
+    def runtime_source(self):
+        runtime = self.root / "runtime"
+        source = runtime / "source/plugin/pintogya"
+        shutil.copytree(self.source, source)
+        for name in builder.OWNED_RUNTIME_FILES:
+            path = runtime / name
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_bytes(b"synthetic owned payload")
+        return runtime, source
+
+    def test_named_native_tasks_and_icon_included_not_official_core(self):
+        runtime, source = self.runtime_source()
+        (runtime / "source/class/task/task_official.php").write_text("not distributed")
+        builder.build(source, self.output, [])
+        with zipfile.ZipFile(self.output) as archive:
+            for name in builder.OWNED_RUNTIME_FILES:
+                self.assertEqual(archive.read("upload/" + name), b"synthetic owned payload")
+            self.assertNotIn("upload/source/class/task/task_official.php", archive.namelist())
+
+    def test_missing_native_task_stops_complete_runtime_package(self):
+        runtime, source = self.runtime_source()
+        (runtime / builder.OWNED_RUNTIME_FILES[0]).unlink()
+        with self.assertRaisesRegex(ValueError, "^missing_native_task_payload$"):
+            builder.build(source, self.output, [])
+
+    def test_native_task_symlink_rejected(self):
+        runtime, source = self.runtime_source()
+        path = runtime / builder.OWNED_RUNTIME_FILES[0]
+        path.unlink()
+        path.symlink_to(self.source / "install.php")
+        with self.assertRaisesRegex(ValueError, "^symlink_in_runtime_payload$"):
+            builder.build(source, self.output, [])
 
 
 if __name__ == "__main__":
