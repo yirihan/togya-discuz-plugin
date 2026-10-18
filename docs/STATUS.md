@@ -6,7 +6,7 @@
 | --- | --- | --- |
 | P0 Baseline and contract | Complete | Fixed extraction inventory and dependency review kept private; public compatibility and architecture contracts present |
 | P1 Public introduction | Published | Public visibility, README content and 0BSD license read back through GitHub; clean independent history |
-| P2 Installation candidate | In progress; lifecycle incomplete | One explicitly authorized additional fresh install passed for alpha.1; alpha.2 upgrade passed after a migration fix. Full uninstall and second-configuration native verification remain incomplete |
+| P2 Installation candidate | Basic lifecycle checks passed; coverage limitations retained | One explicitly authorized additional fresh install passed for alpha.1; alpha.2 upgrade and normal uninstall passed. Active-binding denial-message capture remains unverified; two configurations have synthetic, not dual native-install coverage |
 | P3 Basic RC | Component preparation only; not passed | Synthetic model/QR/supervisor checks available; no native HTTP, PC/Touch or actual scheduler certification |
 | P4 Optional native extensions | Not started | Native task/interaction/credit gates; unverified features backend-disabled |
 | P5 Stable release | Not started | Clean ZIP, Linux extraction, regression evidence and downloaded checksum |
@@ -32,12 +32,12 @@
 | Native enable/disable | 1 each | Passed on isolated fixture | Not a PC/Touch or authorization certification |
 | Native upgrade | 2/3 | Passed after targeted repair | alpha.1 to alpha.2, stable installation identity; strict migration allowlist now includes the plugin's own membership-sync table |
 | Active-binding uninstall | 3/3 | Not fully verified; no further automatic retry | Registration and binding survived, but the harness did not capture the expected denial message; nested native output buffers invalidate that part of the evidence |
-| Retained-data uninstall | 1/3 | Incomplete | Registration removed and synthetic binding retained, but native menu initialization raised an error before lifecycle completion could be proved |
+| Retained-data uninstall | 2/3 | Passed after fixture repair | Native delete flow completed the uninstall hook, removed registration and retained the synthetic binding; corrected AdminCP context and restored test metadata only, without re-running installation. Not a browser-authentication test |
 | Native maintenance | Initial failure, one repair/retest | Status and disabled run passed after repair | CLI must bind the global environment after DX bootstrap; wrong host rejected and unverified rewards skipped. No live-provider or enabled synchronization proof |
 
 The plugin program candidate is not uploaded. A development archive exists locally but is not published, certified or described as installable. No RC or stable release exists. Optional native tasks/interactions/rewards remain server-side disabled pending their own evidence.
 
-The current downgrade is documentation and packaging-tool publication only. The owner explicitly approved one additional fixed-candidate installation attempt; it was consumed once and passed. This does not erase the original failures or authorize more installation retries. Unchanged-path installation evidence is retained; the later candidate was checked by upgrade rather than by another fresh install. Native uninstall, second-configuration and end-to-end rendering evidence remain incomplete. The active-binding uninstall gate reached its own three-attempt limit and is not automatically retried.
+The current publication remains documentation and packaging tools only. The owner explicitly approved one additional fixed-candidate installation attempt; it was consumed once and passed. This does not erase the original failures or authorize more installation retries. Unchanged-path installation evidence is retained; the later candidate was checked by upgrade rather than by another fresh install. Normal uninstall passed after repairing the isolated harness. Both example configurations passed synthetic isolation tests; only one has native lifecycle evidence. End-to-end rendering and provider verification remain incomplete. The active-binding uninstall gate reached its own three-attempt limit and is not automatically retried; registration/data retention was observed, but the missing prompt evidence is not relabeled a pass.
 
 ## Bounded Acceptance
 
