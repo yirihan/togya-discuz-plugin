@@ -11,7 +11,7 @@ This is a target/evidence matrix for an experimental Alpha. It is not a producti
 | MariaDB | Not yet claimed | Not run |
 | HTTPS | Canonical root origin with strict host/origin checks | Generic configuration checked synthetically; subdirectory deployments not claimed |
 | UI | PC and Touch | Native HTML/home/account and cached-renderer subsets passed; browser visual and full media QA outstanding |
-| Scheduling | Plugin-owned CLI; no frontend heavy work | Native disabled-state CLI and child-process bounds passed; enabled live synchronization not certified |
+| Scheduling | Plugin-owned CLI; no frontend heavy work | Enabled public-example synchronization, real child lock and status passed; member synchronization remains outstanding |
 | Private display storage | Outside-webroot directory with owner-only access; same Web/CLI user | Source contract reviewed; deployment provisioning and native runtime gate outstanding |
 | DX X3.x | Not supported by the initial contract | No compatibility claim |
 

@@ -2,6 +2,7 @@
 if(!defined('IN_DISCUZ') && !defined('PINTOGYA_STATIC_TEST')) { exit('Access Denied'); }
 
 require_once dirname(__FILE__).'/lib/activity_native_post.php';
+require_once __DIR__.'/lib/capabilities.php';
 
 class threadplugin_pintogya {
     public $name = 'Togya';
@@ -13,6 +14,9 @@ class threadplugin_pintogya {
         require_once dirname(__FILE__).'/lib/native_task.php';
         $lang = pintogya_lang_pack();
         $escape = static function($value) { return htmlspecialchars((string)$value, ENT_QUOTES, 'UTF-8'); };
+        if(!PintogyaCapabilities::available('native_composer')) {
+            return '<p class="pintogya-activity-unavailable" role="status">'.$escape($lang['activity_view_unavailable']).'</p>';
+        }
         $labels = array('connecting', 'pending', 'ready', 'loading', 'empty', 'selected', 'expired',
             'error', 'mapped', 'select', 'publishing');
         $attributes = '';
@@ -42,6 +46,8 @@ class threadplugin_pintogya {
 
     public function newthread_submit($fid) {
         global $_G;
+        // Stock DX ignores the return value; close until its before-model adapter is verified.
+        PintogyaCapabilities::assertAvailable('native_composer');
         require_once dirname(__FILE__).'/lib/pintogya.php';
         pintogya_assert_post();
         $token = PintogyaActivityNativePost::actionToken($_POST);
@@ -52,6 +58,7 @@ class threadplugin_pintogya {
     public function newthread_submit_end($fid, $tid) {
         global $_G;
         if((int)$tid < 1) { return null; }
+        PintogyaCapabilities::assertAvailable('native_composer');
         require_once dirname(__FILE__).'/lib/pintogya.php';
         $token = PintogyaActivityNativePost::actionToken($_POST);
         $draft = $this->activityThread()->attachDraft((int)$_G['uid'], (int)$fid, $token,

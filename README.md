@@ -6,7 +6,7 @@
 
 Togya Plugin is a developing integration between Discuz X5 forums and [Togya](https://togya.com). It is designed to connect forum accounts, turn supported Togya activities into forum topics, and show authorized progress inside the community.
 
-**Available: `1.0.0-alpha.3-x5`, an experimental development preview, not an RC or a production-supported release.** Download the [Alpha package and checksum](https://github.com/yirihan/togya-discuz-plugin/releases/tag/v1.0.0-alpha.3-x5). The published ZIP was downloaded again and verified; the remaining runtime gates are not thereby certified.
+**Development Alpha: `1.0.0-alpha.4-x5`, not an RC or a production-supported release.** See the [Alpha package and checksum](https://github.com/yirihan/togya-discuz-plugin/releases/tag/v1.0.0-alpha.4-x5) and [upgrade notes](docs/UPGRADING.md). Alpha.3 has a known stock-DX activity-marker incompatibility; do not use it to evaluate activity-topic display.
 
 The [operator guide](docs/INSTALL.md) covers intended installation, key management, maintenance, upgrade and uninstall behavior. Use a disposable complete DX X5 instance; no production installation is certified.
 
@@ -15,9 +15,9 @@ The [operator guide](docs/INSTALL.md) covers intended installation, key manageme
 | Capability | Intended behavior | Standalone release status |
 | --- | --- | --- |
 | Account linking | Session-bound QR approval and encrypted credentials; unlink safely | Native SQL with synthetic provider passed; real camera/provider approval not run |
-| Activity topics | Authorized publishers connect a supported activity to a native forum topic | Native publication flow still needs dedicated acceptance |
+| Activity topics | Native forum topics with authorized Togya content | Admin example model tested with synthetic source/zero rewards; stock view dispatch verified. Member composer is frontend/backend-closed pending its stock-hook adapter |
 | Progress display | Authorized stages and check-ins through PC and Touch views | Native HTML/access and cached-renderer subsets passed; visual/full media QA remains |
-| Background synchronization | Thread display reads local caches, without synchronous Togya calls | Disabled-runtime scheduling and bounded supervisor checks passed; enabled live synchronization not certified |
+| Background synchronization | Thread display reads local caches, without synchronous Togya calls | Enabled CLI cached an anonymous live public example; process locking/batch/status checked. Member synchronization not certified |
 | Native tasks and interactions | Optional task checks and native discussion/rating integration | Separate integration gate; not promised as drop-in |
 | Credit rewards | Administrator-configured rewards, transactions and duplicate-payment protection | Disabled until dedicated financial tests pass |
 

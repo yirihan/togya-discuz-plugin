@@ -205,6 +205,7 @@ function pintogya_verified_install_migrations() {
         '0010_instant_reward.php' => '55970e36435c2b6042130709a3832d2487a1aab58a013a2ae8ce3b4481fe4c4e',
         '0011_bound_participation_discovery.php' => '1af86c40a1f8849a03049ed4475b458d0c5e63be348968978f56139bc71a0f92',
         '0012_checkin_native_interactions.php' => 'c21b62432f78280631082bd2e635ad56c46fd1f795b3276f2f9122903c36a14e',
+        '0013_native_thread_marker.php' => '79e869895900734138f49cc8605adb38099192eec2069d83f8a8088a14f1e09f',
     );
     $paths = array();
     foreach($migrations as $file => $digest) {

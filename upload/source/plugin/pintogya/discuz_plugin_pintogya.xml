@@ -14,7 +14,7 @@
 			<item id="datatables"><![CDATA[]]></item>
 			<item id="directory"><![CDATA[pintogya/]]></item>
 			<item id="copyright"><![CDATA[Togya]]></item>
-		<item id="version"><![CDATA[1.0.0-alpha.3-x5]]></item>
+		<item id="version"><![CDATA[1.0.0-alpha.4-x5]]></item>
 			<item id="modules"><![CDATA[a:4:{i:0;a:11:{s:4:"name";s:5:"admin";s:5:"param";s:0:"";s:4:"menu";s:12:"Togya Plugin";s:3:"url";s:0:"";s:4:"type";s:1:"3";s:7:"adminid";s:1:"1";s:12:"displayorder";s:1:"0";s:8:"navtitle";s:0:"";s:7:"navicon";s:0:"";s:10:"navsubname";s:0:"";s:9:"navsuburl";s:0:"";}i:1;a:11:{s:4:"name";s:6:"thread";s:5:"param";s:0:"";s:4:"menu";s:0:"";s:3:"url";s:0:"";s:4:"type";s:2:"12";s:7:"adminid";s:1:"0";s:12:"displayorder";s:1:"0";s:8:"navtitle";s:0:"";s:7:"navicon";s:0:"";s:10:"navsubname";s:0:"";s:9:"navsuburl";s:0:"";}i:2;a:9:{s:4:"name";s:6:"plugin";s:4:"menu";s:0:"";s:4:"type";s:2:"11";s:7:"adminid";s:1:"0";s:12:"displayorder";s:1:"0";s:8:"navtitle";s:0:"";s:7:"navicon";s:0:"";s:10:"navsubname";s:0:"";s:10:"paramstyle";s:1:"0";}i:3;a:9:{s:4:"name";s:6:"plugin";s:4:"menu";s:0:"";s:4:"type";s:2:"28";s:7:"adminid";s:1:"0";s:12:"displayorder";s:1:"0";s:8:"navtitle";s:0:"";s:7:"navicon";s:0:"";s:10:"navsubname";s:0:"";s:10:"paramstyle";s:1:"0";}}]]></item>
 		</item>
 		<item id="version"><![CDATA[X5.0]]></item>

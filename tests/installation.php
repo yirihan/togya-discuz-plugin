@@ -90,7 +90,19 @@ check(PintogyaCheckinInteractions::capabilities(1,2)===array('comment'=>false,'r
 rejects(static function(){ pintogya_native_services(); },'unverified_tasks_closed');
 check(PintogyaMaintenance::execute('pintogya.instant_rewards',5)===array('skipped'=>'extension_not_verified'),'unverified_reward_worker_closed');
 check(PintogyaMaintenance::execute('pintogya.display_cache',5)===array('skipped'=>'plugin_disabled'),'disabled_worker_no_source');
-check(count(pintogya_verified_install_migrations())===7,'migration_hash_integrity');
+check(count(pintogya_verified_install_migrations())===8,'migration_hash_integrity');
+$digest=hash('sha256','synthetic-native-marker');$message=PintogyaActivityNativePost::messageForDigest($digest);
+check(substr($message,strpos($message,"\0\0\0")+3)==='pintogya','native_plugin_identifier_exact');
+check(PintogyaActivityNativePost::digestFromMessage($message)===$digest,'native_marker_roundtrip');
+check(PintogyaActivityNativePost::digestFromMessage(PintogyaActivityNativePost::MARKER_PREFIX.$digest)===$digest,'legacy_marker_recognition');
+check(PintogyaActivityNativePost::digestFromMessage($message.'extra')===null,'marker_closed_suffix');
+require_once $root.'/thread.class.php';
+rejects(static function(){(new threadplugin_pintogya())->newthread_submit(1);},'unverified_member_composer_closed');
+rejects(static function(){(new threadplugin_pintogya())->newthread_submit_end(1,1);},'unverified_member_composer_completion_closed');
+require_once $root.'/lib/activity_api.php';
+foreach(array('start','poll','list','select')as$operation) {
+    rejects(static function()use($operation){(new PintogyaActivityApi(null,null,null,static function(){return '';}))->execute($operation,1,1,hash('sha256','synthetic-session'),'en-US',1);},'unverified_composer_api_closed');
+}
 $xml=simplexml_load_file($root.'/discuz_plugin_pintogya.xml');
 $data=$xml->xpath('item[@id="Data"]/item[@id="plugin"]')[0];
 $metadata=array();foreach($data->item as $item)$metadata[(string)$item['id']]=(string)$item;

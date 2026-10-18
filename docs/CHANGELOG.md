@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.0.0-alpha.4-x5
+
+- Fix the activity-message trailer to contain exactly the stock DX plugin identifier `pintogya`; keep the reservation digest outside that trailer. No official core replacement.
+- Add bounded migration 0013 for byte-exact old markers on mapped first posts with matching forum/author/topic ownership. Edited bodies are not overwritten; conversion is idempotent and transactional.
+- Close the unverified ordinary-member composer UI, submit/completion hooks, composer API and resume route. Stock DX ignores the submit callback's return value; a proper native before-model adapter remains to be implemented. This is an explicitly deferred path, not an implemented feature.
+- Native zero-reward admin example publication, idempotency, failure rollback and unmodified stock-view dispatch checked with synthetic input. Transaction commits are savepoint-adapted in that fixture, so it is not native commit or payout proof.
+- Enabled public-example synchronization checked with actual child processes/default private cache; member credentials and QR approval were not exercised.
+
+Still an experimental Alpha, not RC/stable. Read [UPGRADING.md](UPGRADING.md) before upgrading an Alpha.3 test instance.
+
 ## 1.0.0-alpha.3-x5
 
 Experimental development preview, not an RC or production-supported release.
