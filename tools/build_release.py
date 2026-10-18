@@ -80,6 +80,7 @@ def build(source, output, deny):
     repository = Path(__file__).resolve().parent.parent
     documents = [Path(name) for name in ("README.md", "README.zh-CN.md", "LICENSE", "SECURITY.md", "CONTRIBUTING.md")]
     documents.extend(path.relative_to(repository) for path in sorted((repository / "docs").glob("*.md")))
+    documents.extend(Path(name) for name in ("docs/images/activity-pc.png", "docs/images/activity-touch.png"))
     for relative in documents:
         name = relative.as_posix()
         path = repository / name

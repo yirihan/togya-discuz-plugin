@@ -10,9 +10,9 @@ This is a target/evidence matrix for an experimental Alpha. It is not a producti
 | Database | MySQL 8 with InnoDB | MySQL 8.4.11 native schema/lifecycle and synthetic-provider binding transactions passed; financial concurrency not run and grants stay closed |
 | MariaDB | Not yet claimed | Not run |
 | HTTPS | Canonical root origin with strict host/origin checks | Generic configuration checked synthetically; subdirectory deployments not claimed |
-| UI | PC and Touch | Native HTML/home/account and cached-renderer subsets passed; browser visual and full media QA outstanding |
-| Scheduling | Plugin-owned CLI; no frontend heavy work | Enabled public-example synchronization, real child lock and status passed; member synchronization remains outstanding |
-| Private display storage | Outside-webroot directory with owner-only access; same Web/CLI user | Source contract reviewed; deployment provisioning and native runtime gate outstanding |
+| UI | PC and Touch | Synthetic native browser display, local PNG decode, PC zoom trigger and cache-aware native permission denial passed; full member-posting gate remains partial |
+| Scheduling | Plugin-owned CLI; no frontend heavy work | Enabled public-example child/lock/status passed. Separate real SQL/default-HTTPS member-cache fill passed in-process; member scheduler-child/participation coverage is not claimed |
+| Private display storage | Outside-webroot directory with owner-only access; same Web/CLI user | Isolated default storage and native browser hot-cache reads passed; unrelated host/shared-hosting policies are not certified |
 | DX X3.x | Not supported by the initial contract | No compatibility claim |
 
 Native interactions, task adapters and credit rewards have separate gates. The plugin will not silently overwrite official core files. Missing integrations must disable affected backend operations.

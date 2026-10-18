@@ -4,7 +4,7 @@ require_once __DIR__.'/crypto.php';
 
 final class PintogyaInstallation {
     const SETTING_KEY = 'pintogya_installation_identity';
-    const VERSION = '1.0.0-alpha.5-x5';
+    const VERSION = '1.0.0-alpha.6-x5';
 
     public static function validScope($scope) {
         return is_string($scope) && preg_match('/\Atogya-forum:[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}\z/D', $scope) === 1;

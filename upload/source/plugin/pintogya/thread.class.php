@@ -83,6 +83,7 @@ class threadplugin_pintogya {
 
     public function viewthread($tid) {
         global $_G, $navtitle, $metadescription, $metakeywords, $thread;
+        PintogyaActivityNativePost::hideRenderedMarker((int)$tid);
         if(!defined('PINTOGYA_DISPLAY_REQUEST')) { define('PINTOGYA_DISPLAY_REQUEST',true); }
         require_once dirname(__FILE__).'/lib/pintogya.php';
         $lang = pintogya_lang_pack();

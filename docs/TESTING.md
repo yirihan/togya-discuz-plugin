@@ -12,6 +12,7 @@ php tests/installation.php
 php tests/cli-bootstrap.php
 php tests/host_components.php
 php tests/cache_components.php
+php tests/attachment_components.php
 php tests/protocol_components.php
 php tests/qr_components.php
 php tests/supervisor_components.php

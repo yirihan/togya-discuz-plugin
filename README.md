@@ -6,7 +6,7 @@
 
 Togya Plugin is a developing integration between Discuz X5 forums and [Togya](https://togya.com). It is designed to connect forum accounts, turn supported Togya activities into forum topics, and show authorized progress inside the community.
 
-**Development source: `1.0.0-alpha.5-x5` (unreleased); latest downloadable Alpha: `1.0.0-alpha.4-x5`. Neither is an RC or a production-supported release.** See the [Alpha package and checksum](https://github.com/yirihan/togya-discuz-plugin/releases/tag/v1.0.0-alpha.4-x5) and [upgrade notes](docs/UPGRADING.md). Alpha.3 has a known stock-DX activity-marker incompatibility; do not use it to evaluate activity-topic display.
+**Experimental candidate: `1.0.0-alpha.6-x5`, not an RC or a production-supported release.** Downloadable artifacts and checksums, when published, are listed on [GitHub Releases](https://github.com/yirihan/togya-discuz-plugin/releases). See the [synthetic UI previews](docs/PREVIEW.md) and [upgrade notes](docs/UPGRADING.md). Alpha.3 has a known stock-DX activity-marker incompatibility; do not use it to evaluate activity-topic display.
 
 The [operator guide](docs/INSTALL.md) covers intended installation, key management, maintenance, upgrade and uninstall behavior. Use a disposable complete DX X5 instance; no production installation is certified.
 
@@ -16,7 +16,7 @@ The [operator guide](docs/INSTALL.md) covers intended installation, key manageme
 | --- | --- | --- |
 | Account linking | Session-bound QR approval and encrypted credentials; unlink safely | Native SQL with synthetic provider passed; real camera/provider approval not run |
 | Activity topics | Native forum topics with authorized Togya content | Alpha.4 closes the member composer. Unreleased source adds a stock before-model adapter: eight native-model scenarios pass with synthetic sessions/source and zero rewards; full controller HTTP, browser and real approval remain unverified |
-| Progress display | Authorized stages and check-ins through PC and Touch views | Native HTML/access and cached-renderer subsets passed; visual/full media QA remains |
+| Progress display | Authorized stages and check-ins through PC and Touch views | Synthetic native PC/Touch browser pages, local PNG decode, PC zoom trigger and warm-cache permission denial passed; member-media and real-provider coverage not claimed |
 | Background synchronization | Thread display reads local caches, without synchronous Togya calls | Enabled CLI cached an anonymous live public example; process locking/batch/status checked. Member synchronization not certified |
 | Native tasks and interactions | Optional task checks and native discussion/rating integration | Separate integration gate; not promised as drop-in |
 | Credit rewards | Administrator-configured rewards, transactions and duplicate-payment protection | Disabled until dedicated financial tests pass |

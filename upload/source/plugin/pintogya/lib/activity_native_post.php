@@ -26,6 +26,18 @@ final class PintogyaActivityNativePost {
         return preg_match('/^[0-9a-f]{64}$/D', $digest) ? $digest : null;
     }
 
+    public static function hideRenderedMarker($tid) {
+        global $_G,$postlist;
+        $pid=(int)($_G['forum_firstpid']??0);$post=$postlist[$pid]??null;
+        if(!is_int($tid)||$tid<1||!is_array($post)||(int)($post['tid']??0)!==$tid||empty($post['first'])||
+            !is_string($post['message']??null)) { return false; }
+        $message=str_replace(array("<br />\n","<br/>\n","<br>\n",'<br />','<br/>','<br>'),"\n",$post['message']);
+        if(strlen($message)!==strlen(self::NATIVE_PREFIX)+64||self::digestFromMessage($message.self::NATIVE_SUFFIX)===null) { return false; }
+        // Stock DX already removed the plugin trailer; suppress only the exact machine-owned body in memory.
+        $postlist[$pid]['message']='';
+        return true;
+    }
+
     public static function upgradeLegacyMarkers($limit = 1000) {
         if(!defined('PINTOGYA_INSTALL_CONTEXT') || !is_int($limit) || $limit<1 || $limit>1000) {
             throw new RuntimeException('activity_marker_migration_context_invalid');

@@ -30,6 +30,11 @@ final class PintogyaDisplayAttachments {
         if(!$name || strlen($body)!==$data['size'] || !hash_equals($data['sha256'],hash('sha256',$body))) {
             throw new RuntimeException('display_cache_image_invalid');
         }
+        // A fresh DX installation may not have created its forum attachment directory yet.
+        $parent=dirname($this->root);
+        if(!is_dir($parent) && !is_link($parent) && !@mkdir($parent,0755)) {
+            throw new RuntimeException('display_attachment_directory_unavailable');
+        }
         if(!file_exists($this->root) && !is_link($this->root) && !@mkdir($this->root,0755)) {
             throw new RuntimeException('display_attachment_directory_unavailable');
         }

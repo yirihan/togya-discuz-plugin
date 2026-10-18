@@ -1,6 +1,15 @@
 # Changelog
 
-## 1.0.0-alpha.5-x5 (Unreleased)
+## 1.0.0-alpha.6-x5 (Experimental Candidate)
+
+- Create the immediate forum-attachment parent when a fresh DX installation has not created it yet. Do not alter existing directory permissions. Eight macOS/Linux storage checks cover creation, unchanged parent modes, idempotency, invalid bytes and symlink-root refusal.
+- Hide only the exact machine-owned activity marker in the native first-post render buffer, including native HTML line-break conversion. Do not change stored posts, edited content, other topics or replies. Portable boundary checks total 53.
+- Native SQL/default-HTTPS member-cache integration passes six scenarios/18 assertions with a synthetic provider; cold/warm foreground reads make no upstream requests, and member/generation/revocation boundaries remain enforced.
+- Synthetic native PC/Touch browser display, local PNG decoding, PC zoom trigger and denial of warm cached content pass. These are not member-posting, real app approval or public TLS claims. Add privacy-reviewed synthetic UI previews.
+
+The bounded Alpha.5 full-member-controller gate remains partial and is not reset by these unrelated changes. Alpha.5 was a source checkpoint only. Actual downloadable assets are listed on [GitHub Releases](https://github.com/yirihan/togya-discuz-plugin/releases); these notes alone are not publication proof.
+
+## 1.0.0-alpha.5-x5 (Source Checkpoint Only)
 
 - Add a stock DX before-model adapter for ordinary-member activity publication without replacing official core files. Bind canonical body, draft state, owner/session and completion to the same native model instance; ignore untrusted editor/funding/attachment fields.
 - Preserve native moderation instead of automatically approving moderated topics. Duplicate completion does not repeat publication.
