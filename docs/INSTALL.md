@@ -1,6 +1,6 @@
 # Operator Guide (Draft)
 
-**This guide describes the intended standalone candidate interface. The native-install gate has not passed. There is no supported RC/stable package, and these instructions are not approval to install a snapshot on production.**
+**This guide describes the intended standalone candidate interface. An earlier candidate passed a fresh-install check, but the current candidate's full lifecycle and end-to-end gates remain incomplete. There is no supported RC/stable package, and these instructions are not approval to install a snapshot on production.**
 
 [简体中文](INSTALL.zh-CN.md) · [Actual status](STATUS.md) · [Compatibility](COMPATIBILITY.md)
 

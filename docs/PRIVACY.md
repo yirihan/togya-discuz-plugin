@@ -18,7 +18,7 @@ Display snapshots and their private image store are outside the webroot and requ
 
 Unlinking/disabling access is not a general erasure operation. The candidate's uninstall preserves its tables and installation identity, and no blanket data-purge command is provided. Operators must define their retention/deletion process before collecting actual member content, including retained mirrors, forum attachments, account records and backups.
 
-These statements are source-derived candidate behavior, not a completed lifecycle or access-control certification. The native install and end-to-end gates remain outstanding.
+These statements are source-derived candidate behavior, not a completed lifecycle or access-control certification. Current-candidate lifecycle and end-to-end gates remain outstanding.
 
 ## Reports
 
