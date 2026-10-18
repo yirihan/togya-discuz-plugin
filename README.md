@@ -6,7 +6,7 @@
 
 Togya Plugin is a developing integration between Discuz X5 forums and [Togya](https://togya.com). It is designed to connect forum accounts, turn supported Togya activities into forum topics, and show authorized progress inside the community.
 
-**Experimental candidate: `1.0.0-alpha.6-x5`, not an RC or a production-supported release.** Downloadable artifacts and checksums, when published, are listed on [GitHub Releases](https://github.com/yirihan/togya-discuz-plugin/releases). See the [synthetic UI previews](docs/PREVIEW.md) and [upgrade notes](docs/UPGRADING.md). Alpha.3 has a known stock-DX activity-marker incompatibility; do not use it to evaluate activity-topic display.
+**Experimental source candidate: `1.0.0-alpha.7-x5`, not an RC or a production-supported release.** Downloadable artifacts and checksums, when published, are listed on [GitHub Releases](https://github.com/yirihan/togya-discuz-plugin/releases). See the [synthetic UI previews](docs/PREVIEW.md) and [upgrade notes](docs/UPGRADING.md). Alpha.6 and earlier can expose member-image caches through static URLs after synchronization: do not use them with real private content. Alpha.7 protects new member images and retires verified legacy mirrors; missing legacy identity records require operator review before reuse.
 
 The [operator guide](docs/INSTALL.md) covers intended installation, key management, maintenance, upgrade and uninstall behavior. Use a disposable complete DX X5 instance; no production installation is certified.
 
@@ -15,7 +15,7 @@ The [operator guide](docs/INSTALL.md) covers intended installation, key manageme
 | Capability | Intended behavior | Standalone release status |
 | --- | --- | --- |
 | Account linking | Session-bound QR approval and encrypted credentials; unlink safely | Native SQL with synthetic provider passed; real camera/provider approval not run |
-| Activity topics | Native forum topics with authorized Togya content | Alpha.4 closes the member composer. Unreleased source adds a stock before-model adapter: eight native-model scenarios pass with synthetic sessions/source and zero rewards; full controller HTTP, browser and real approval remain unverified |
+| Activity topics | Native forum topics with authorized Togya content | Stock before-model adapter; eight native-model scenarios and four native PC/Touch controller HTTP checks pass with synthetic upstream and zero rewards. Real provider approval is not verified |
 | Progress display | Authorized stages and check-ins through PC and Touch views | Synthetic native PC/Touch browser pages, local PNG decode, PC zoom trigger and warm-cache permission denial passed; member-media and real-provider coverage not claimed |
 | Background synchronization | Thread display reads local caches, without synchronous Togya calls | Enabled CLI cached an anonymous live public example; process locking/batch/status checked. Member synchronization not certified |
 | Native tasks and interactions | Optional task checks and native discussion/rating integration | Separate integration gate; not promised as drop-in |

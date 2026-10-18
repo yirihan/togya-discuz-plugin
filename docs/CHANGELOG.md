@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.0.0-alpha.7-x5 (Experimental Source Candidate)
+
+- Security: member images are no longer materialized in public attachment storage or advertised with static URLs. Reads use the existing authenticated, CSRF-protected native endpoint and same-origin POST; public images retain their normal static behavior.
+- Browser images use validated image blobs, two concurrent requests, stale-response cancellation and URL revocation. Member, binding and native reading permissions remain checked on every protected HTTP read.
+- Maintenance retires only identified legacy member mirrors whose retained private bytes and public hash match, records evidence before removal and preserves the private copy. Lost job identity cannot be recovered safely by this migration; review unknown legacy files before reuse.
+- Five native private-media HTTP cases and six disk-boundary cases/16 assertions pass with synthetic data. Browser transport/decoding checks use synthetic responses, not real provider approval.
+- The separately approved single Alpha.5 controller HTTP retest was consumed once and passed all four original cases: PC/Touch publication, duplicate refusal without another topic, guest refusal. No additional installation or retry is implied.
+
+Alpha.6 and earlier remain immutable, unsafe for real private member-image content. Alpha.7 source is not itself a published download or an RC/stable claim.
+
 ## 1.0.0-alpha.6-x5 (Experimental Candidate)
 
 - Create the immediate forum-attachment parent when a fresh DX installation has not created it yet. Do not alter existing directory permissions. Eight macOS/Linux storage checks cover creation, unchanged parent modes, idempotency, invalid bytes and symlink-root refusal.
@@ -7,7 +17,7 @@
 - Native SQL/default-HTTPS member-cache integration passes six scenarios/18 assertions with a synthetic provider; cold/warm foreground reads make no upstream requests, and member/generation/revocation boundaries remain enforced.
 - Synthetic native PC/Touch browser display, local PNG decoding, PC zoom trigger and denial of warm cached content pass. These are not member-posting, real app approval or public TLS claims. Add privacy-reviewed synthetic UI previews.
 
-The bounded Alpha.5 full-member-controller gate remains partial and is not reset by these unrelated changes. Alpha.5 was a source checkpoint only. Actual downloadable assets are listed on [GitHub Releases](https://github.com/yirihan/togya-discuz-plugin/releases); these notes alone are not publication proof.
+At Alpha.6 publication the bounded Alpha.5 full-member-controller gate was partial; the later separately authorized single retest is recorded above without erasing its failures. Alpha.5 was a source checkpoint only. Actual downloadable assets are listed on [GitHub Releases](https://github.com/yirihan/togya-discuz-plugin/releases); these notes alone are not publication proof.
 
 ## 1.0.0-alpha.5-x5 (Source Checkpoint Only)
 

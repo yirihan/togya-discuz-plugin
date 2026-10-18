@@ -6,7 +6,7 @@ The packager creates an archive and checks structural integrity. It does **not**
 
 ```sh
 python3 -m unittest discover -s tests -p test_build_release.py -v
-python3 tools/build_release.py --source upload/source/plugin/pintogya --output build/Togya-Plugin-1.0.0-alpha.4-x5.zip
+python3 tools/build_release.py --source upload/source/plugin/pintogya --output build/Togya-Plugin-1.0.0-alpha.7-x5.zip
 ```
 
 The output filename must match the plugin's declared version. The source must contain matching installation metadata, lifecycle entry points and verified migration hashes. The builder includes the original and third-party license notices present in the source, along with the public documentation.

@@ -13,6 +13,8 @@
     var controller = null;
     var feedControllers = [];
     var mediaUrls = [];
+    var imageJobs = [];
+    var activeImages = 0;
     var refreshTimer = 0;
     var serial = 0;
     var reviewStates = Object.create(null);
@@ -23,6 +25,10 @@
       if (feedControllers.length) { renderedAt = 0; }
       feedControllers.forEach(function (pending) { pending.abort(); });
       feedControllers = [];
+      imageJobs.forEach(function (job) {
+        if (job.button.pintogyaImagePending === job.identity) { job.button.pintogyaImagePending = false; job.button.hidden = false; }
+      });
+      imageJobs = [];
       if (!keepGallery) {
         mediaUrls.forEach(function (url) { URL.revokeObjectURL(url); });
         mediaUrls = [];
@@ -38,6 +44,16 @@
       if (publicStages) { publicStages.hidden = false; }
       if (reviewActions) { reviewActions.remove(); reviewActions = null; }
       node.dispatchEvent(new Event('pintogya:stages-rendered'));
+    }
+    function pumpImages() {
+      while (activeImages < 2 && imageJobs.length) {
+        var job = imageJobs.shift();
+        activeImages++;
+        Promise.resolve().then(job.start).catch(function () {}).finally(function () {
+          activeImages--;
+          pumpImages();
+        });
+      }
     }
     function reviewKey(kind, sourceRef) {
       return kind === 'completion' ? 'completion' : 'checkin:' + sourceRef;
@@ -155,6 +171,7 @@
       });
     }
     function loadImage(stageId, cursor, mediaId, entry, button, imageIndex, imageUrl) {
+      if (button.pintogyaImagePending) { return; }
       button.hidden = true;
       function unavailable(text) {
         if (!button.pintogyaPendingStatus) {
@@ -165,12 +182,16 @@
         }
         button.pintogyaPendingStatus.textContent = text;
       }
-      if (typeof imageUrl !== 'string' || !/^\/data\/attachment\/forum\/pintogya\/[a-f0-9]{64}\.(?:jpg|png|webp)$/.test(imageUrl)) {
-        unavailable(stages.dataset.labelCachePending || stages.dataset.labelFeedLoading);
+      var endpoint;
+      try { endpoint = new URL(stages.dataset.imageEndpoint, window.location.href); } catch (error) {}
+      if (!endpoint || endpoint.origin !== window.location.origin) {
+        unavailable(stages.dataset.labelPhotoUnavailable || stages.dataset.labelFeedPhoto);
+        button.hidden = false;
         return;
       }
-      // Already authorized by this feed. The browser loads a normal local DX attachment directly.
-      var url = imageUrl;
+      // Never trust a legacy static URL for member media: every new image request passes the native POST gate.
+      var current = serial;
+      function render(url) {
         var photo = document.createElement('img');
         photo.src = url;
         photo.alt = stages.dataset.labelFeedPhoto;
@@ -211,8 +232,58 @@
         button.hidden = true;
       photo.addEventListener('error', function () {
         gallery.hidden = true;
+        URL.revokeObjectURL(url);
+        mediaUrls = mediaUrls.filter(function (item) { return item !== url; });
         unavailable(stages.dataset.labelPhotoUnavailable || stages.dataset.labelFeedPhoto);
+        button.hidden = false;
       });
+      }
+      var jobIdentity = {};
+      button.pintogyaImagePending = jobIdentity;
+      unavailable(stages.dataset.labelFeedLoading);
+      imageJobs.push({ button: button, identity: jobIdentity, start: function () {
+        if (current !== serial) {
+          if (button.pintogyaImagePending === jobIdentity) { button.pintogyaImagePending = false; button.hidden = false; }
+          return;
+        }
+        var pending = new AbortController();
+        feedControllers.push(pending);
+        var timeout = setTimeout(function () { pending.abort(); }, 12000);
+        var body = new URLSearchParams({ formhash: node.dataset.formhash, tid: node.dataset.tid,
+          stage_id: stageId, cursor: cursor, checkin_id: mediaId, image_index: imageIndex });
+        return fetch(endpoint.href, { method: 'POST', credentials: 'same-origin', redirect: 'error',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body.toString(), signal: pending.signal
+        }).then(function (response) {
+          if (!response.ok) {
+            return response.json().then(function (data) { throw new Error(data && data.error === 'activity_display_pending' ? 'activity_display_pending' : 'private_image_denied'); });
+          }
+          var type = (response.headers.get('Content-Type') || '').toLowerCase();
+          var length = Number(response.headers.get('Content-Length'));
+          if (['image/jpeg', 'image/png', 'image/webp'].indexOf(type) === -1 || length > 12582912) { throw new Error('private_image_invalid'); }
+          return response.blob().then(function (blob) {
+            if (blob.size < 1 || blob.size > 12582912 || blob.type !== type) { throw new Error('private_image_invalid'); }
+            return blob;
+          });
+        }).then(function (blob) {
+          if (current !== serial) { return; }
+          var url = URL.createObjectURL(blob);
+          mediaUrls.push(url);
+          render(url);
+        }).catch(function (error) {
+          if (current !== serial) { return; }
+          unavailable(error.message === 'activity_display_pending' ?
+            (stages.dataset.labelCachePending || stages.dataset.labelFeedLoading) : (stages.dataset.labelPhotoUnavailable || stages.dataset.labelFeedPhoto));
+          button.hidden = false;
+        }).finally(function () {
+          clearTimeout(timeout);
+          if (button.pintogyaImagePending === jobIdentity) {
+            button.pintogyaImagePending = false;
+            if (current !== serial && !entry.querySelector('.pintogya-checkin-photo')) { button.hidden = false; }
+          }
+          feedControllers = feedControllers.filter(function (item) { return item !== pending; });
+        });
+      } });
+      pumpImages();
     }
     function loadFeed(stageId, feedList, showButton, moreButton, status, cursor) {
       var current = serial;
@@ -539,6 +610,12 @@
     // Do not refetch on every window focus; account/visibility changes still revalidate private data.
     window.addEventListener('pageshow', function (event) {
       if (event.persisted) { scheduleRefresh(); }
+    });
+    window.addEventListener('pagehide', function () {
+      ++serial;
+      clearTimeout(refreshTimer);
+      if (controller) { controller.abort(); controller = null; }
+      clearViewer();
     });
     refresh();
   });

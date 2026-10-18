@@ -111,6 +111,8 @@ final class PintogyaMaintenanceRunner {
         foreach(array('cached','removed','membershipDeferred','authDeferred') as $key) {
             if(isset($result[$key]) && is_int($result[$key]) && $result[$key]>=0 && $result[$key]<=512) { $safe[$key]=$result[$key]; }
         }
+        $retired=$result['localImages']['retiredPrivate']??null;
+        if(is_int($retired)&&$retired>=0&&$retired<=64) { $safe['retiredPrivateImages']=$retired; }
         if(isset($result['membership'])) {
             $profile = $result['membership'];
             if(!is_array($profile) || array_keys($profile) !== array('schema','isolated','deferred','service','unknown') || $profile['schema'] !== 1) {
