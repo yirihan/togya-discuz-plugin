@@ -49,8 +49,10 @@ function configure($database,$prefix='dx_') {
 }
 $checks=0;
 function check($value,$label) { global $checks; if(!$value)throw new RuntimeException('check_failed:'.$label);$checks++; }
-function rejects($callable,$label) {
-    try { $callable(); } catch(Throwable $error) { check(true,$label);return; }
+function rejects($callable,$label,$expectedSymbol=null) {
+    try { $callable(); } catch(Throwable $error) {
+        check($expectedSymbol===null||($error instanceof RuntimeException&&$error->getMessage()===$expectedSymbol),$label);return;
+    }
     throw new RuntimeException('expected_rejection:'.$label);
 }
 
@@ -84,10 +86,11 @@ $_G['config']['db']['map']=array('common_setting'=>'external');rejects(static fu
 foreach(array('https://user:pass@forum.example.org/','http://forum.example.org/','https://forum.example.org/app/') as $origin) {
     rejects(static function() use($origin){ PintogyaSiteProfile::hostFromSettings(array('siteurl'=>$origin)); },'unsafe_origin');
 }
-rejects(static function(){ PintogyaActivityInstantSettlement::grant(null,null,null); },'unverified_reward_backend_closed');
-rejects(static function(){ (new PintogyaCheckinInteractions(null,null,null))->prepare(0,0,'','','','','comment',0); },'unverified_interaction_backend_closed');
+rejects(static function(){ PintogyaActivityInstantSettlement::grant(null,null,null); },'unverified_reward_backend_closed','extension_not_verified');
+rejects(static function(){ (new PintogyaCheckinInteractions(null,null,null))->prepare(0,0,'','','','','comment',0); },'unverified_interaction_backend_closed','extension_not_verified');
 check(PintogyaCheckinInteractions::capabilities(1,2)===array('comment'=>false,'rate'=>false),'unverified_buttons_closed');
-rejects(static function(){ pintogya_native_services(); },'unverified_tasks_closed');
+require_once $root.'/lib/native_task.php';
+rejects(static function(){ pintogya_native_services(); },'unverified_tasks_closed','extension_not_verified');
 check(PintogyaMaintenance::execute('pintogya.instant_rewards',5)===array('skipped'=>'extension_not_verified'),'unverified_reward_worker_closed');
 check(PintogyaMaintenance::execute('pintogya.display_cache',5)===array('skipped'=>'plugin_disabled'),'disabled_worker_no_source');
 check(count(pintogya_verified_install_migrations())===8,'migration_hash_integrity');
@@ -97,11 +100,11 @@ check(PintogyaActivityNativePost::digestFromMessage($message)===$digest,'native_
 check(PintogyaActivityNativePost::digestFromMessage(PintogyaActivityNativePost::MARKER_PREFIX.$digest)===$digest,'legacy_marker_recognition');
 check(PintogyaActivityNativePost::digestFromMessage($message.'extra')===null,'marker_closed_suffix');
 require_once $root.'/thread.class.php';
-rejects(static function(){(new threadplugin_pintogya())->newthread_submit(1);},'unverified_member_composer_closed');
-rejects(static function(){(new threadplugin_pintogya())->newthread_submit_end(1,1);},'unverified_member_composer_completion_closed');
+rejects(static function(){(new threadplugin_pintogya())->newthread_submit(1);},'unverified_member_composer_closed','extension_not_verified');
+rejects(static function(){(new threadplugin_pintogya())->newthread_submit_end(1,1);},'unverified_member_composer_completion_closed','extension_not_verified');
 require_once $root.'/lib/activity_api.php';
 foreach(array('start','poll','list','select')as$operation) {
-    rejects(static function()use($operation){(new PintogyaActivityApi(null,null,null,static function(){return '';}))->execute($operation,1,1,hash('sha256','synthetic-session'),'en-US',1);},'unverified_composer_api_closed');
+    rejects(static function()use($operation){(new PintogyaActivityApi(null,null,null,static function(){return '';}))->execute($operation,1,1,hash('sha256','synthetic-session'),'en-US',1);},'unverified_composer_api_closed','extension_not_verified');
 }
 $xml=simplexml_load_file($root.'/discuz_plugin_pintogya.xml');
 $data=$xml->xpath('item[@id="Data"]/item[@id="plugin"]')[0];

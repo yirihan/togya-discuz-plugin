@@ -47,6 +47,10 @@
 | Stock view/marker upgrade | Alpha.4 targeted regression | Passed | Unmodified stock special-thread dispatcher selects plugin; old mapped marker converts, repeat is a no-op, edited trailing-space body survives. Pure format/closed-backend unit checks also pass |
 | Alpha.4 native upgrade | Remaining third native upgrade check | Passed | Version/identity/table engine checks pass, enabled state preserved, eight verified migrations. No additional installation attempt |
 
+The [Alpha.4 prerelease](https://github.com/yirihan/togya-discuz-plugin/releases/tag/v1.0.0-alpha.4-x5) targets `929d7b100f346071deef0f7ce5fa1aa571c5a3fe`. ZIP SHA-256: `76eb8060b7b853760ec0850467a068de2ed263fe6a6bede413fa293dd337cd38`. A fresh download matched the checksum and all 231 payload hashes (232 entries); all 215 program blobs matched the release Git commit. The Alpha.3 release notes now carry the discovered stock-view defect without replacing its assets.
+
+Portable closed-backend tests now require the exact `extension_not_verified` runtime error. A missing native-task function import in the earlier synthetic test could have counted as rejection; the import/assertion fixture was repaired and all 43 checks passed. This correction changes tests only, not the Alpha.4 program or its immutable ZIP.
+
 The invalid-CSRF negative test is accepted only for the plugin's explicit refusal or DX's exact native request-tainting refusal page. DX returns HTTP 503 for that native rejection before dispatch; it is not treated as a successful normal page or as proof that arbitrary 503 responses are safe.
 
 The Alpha program source is an experimental evaluation candidate. It is disabled by default, not a supported production installer. No RC or stable release exists. Optional native tasks/interactions/credit grants remain server-side disabled pending their own evidence. The rights holder confirmed public redistribution of the included Togya Logo and example illustrations; third-party notices remain intact.
