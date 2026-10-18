@@ -1,7 +1,7 @@
 <?php
 if(!defined('IN_DISCUZ') && !defined('PINTOGYA_STATIC_TEST')) { exit('Access Denied'); }
 
-// Only anonymous public media may be materialized as ordinary DX attachments.
+// Ordinary DX attachment URLs: the granted feed decides which URLs to render, not each image GET.
 final class PintogyaDisplayAttachments {
     const PREFIX = '/data/attachment/forum/pintogya/';
     private $root;
@@ -18,7 +18,6 @@ final class PintogyaDisplayAttachments {
         return $s && ($s['mode']&0170000)===0100000 && $s['nlink']===1 && $s['uid']===posix_geteuid();
     }
     public function url($request,$data) {
-        if(($request['kind']??null)!=='public_image') { return null; }
         $s=@lstat($this->root);
         if(!$s || ($s['mode']&0170000)!==0040000 || $s['uid']!==posix_geteuid() || is_link($this->root)) { return null; }
         $name=$this->name($request,$data);
@@ -27,7 +26,6 @@ final class PintogyaDisplayAttachments {
     }
     public function store($request,$data,$body,$now) {
         if(PHP_SAPI!=='cli') { throw new RuntimeException('display_cache_cli_only'); }
-        if(($request['kind']??null)!=='public_image') { throw new RuntimeException('private_media_public_store_forbidden'); }
         $name=$this->name($request,$data);
         if(!$name || strlen($body)!==$data['size'] || !hash_equals($data['sha256'],hash('sha256',$body))) {
             throw new RuntimeException('display_cache_image_invalid');
@@ -60,28 +58,6 @@ final class PintogyaDisplayAttachments {
             if(!rename($temp,$path) || !touch($path,$now)) { throw new RuntimeException('display_attachment_write_failed'); }
         } finally { if(is_resource($f))fclose($f);if(is_file($temp))unlink($temp); }
         return true;
-    }
-    public function retireMemberImage($request,$data,$body,$audit) {
-        if(PHP_SAPI!=='cli'||!is_callable($audit)||($request['kind']??null)!=='member_image') {
-            throw new RuntimeException('private_media_retirement_invalid');
-        }
-        PintogyaDisplayCache::validate($request);
-        $name=$this->name($request,$data);if(!$name)throw new RuntimeException('display_cache_image_invalid');
-        $path=$this->root.'/'.$name;
-        if(!file_exists($path)&&!is_link($path))return false;
-        $directory=@lstat($this->root);
-        if(!$directory||is_link($this->root)||($directory['mode']&0170000)!==0040000||$directory['uid']!==posix_geteuid()||
-            !$this->regular($path)||!is_string($body)||strlen($body)!==$data['size']||
-            !hash_equals($data['sha256'],hash('sha256',$body))||!hash_equals($data['sha256'],hash_file('sha256',$path))) {
-            throw new RuntimeException('private_media_retirement_unverified');
-        }
-        call_user_func($audit,array('filename'=>$name,'size'=>$data['size'],'sha256'=>$data['sha256'],'mtime'=>filemtime($path)));
-        if(!unlink($path))throw new RuntimeException('private_media_retirement_failed');
-        return true;
-    }
-    public function hasMemberImage($request,$data) {
-        if(($request['kind']??null)!=='member_image')return false;
-        $name=$this->name($request,$data);return $name!==null&&(file_exists($this->root.'/'.$name)||is_link($this->root.'/'.$name));
     }
     public function collect($now,$limit=64) {
         if(PHP_SAPI!=='cli') { throw new RuntimeException('display_cache_cli_only'); }

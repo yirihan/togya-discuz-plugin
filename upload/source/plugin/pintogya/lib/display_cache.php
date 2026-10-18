@@ -161,7 +161,6 @@ final class PintogyaDisplayCache {
     }
 
     public function imageUrl($request) {
-        if(($request['kind']??null)!=='public_image') { return null; }
         $entry=$this->peek($request);
         return $entry ? $this->attachments()->url($request,$entry['data']) : null;
     }
@@ -169,35 +168,11 @@ final class PintogyaDisplayCache {
     public function materializeImages($limit=64) {
         $this->cli();
         if(!is_int($limit)||$limit<1||$limit>64) { throw new InvalidArgumentException('display_cache_batch_invalid'); }
-        $attachments=$this->attachments();$attachments->collect($this->now(),$limit);$written=0;$scanned=0;$retired=0;
+        $attachments=$this->attachments();$attachments->collect($this->now(),$limit);$written=0;$scanned=0;
         foreach($this->jobFiles() as $path) {
             $job=$this->job($path);
             if(!$job || !str_ends_with($job['request']['kind'],'_image'))continue;
             $r=$job['request'];$entry=$this->peek($r);
-            if($r['kind']==='member_image') {
-                $entry=$this->retained($r);
-                $body=null;
-                if(!$entry) {
-                    // A legacy public write may have preceded a failed snapshot write; retain its queued identity.
-                    $body=$this->readFile($this->root.'/images/'.self::id($r).'.bin',self::MAX_IMAGE_BYTES);
-                    if($body===null)continue;
-                    $info=@getimagesizefromstring($body);$mime=$info['mime']??null;
-                    if(!in_array($mime,array('image/jpeg','image/png','image/webp'),true))throw new RuntimeException('private_media_retirement_unverified');
-                    $entry=array('data'=>array('contentType'=>$mime,'size'=>strlen($body),'sha256'=>hash('sha256',$body)));
-                }
-                if(!$attachments->hasMemberImage($r,$entry['data']))continue;
-                if($scanned>=$limit)break;$scanned++;
-                if($body===null)$body=$this->readFile($this->root.'/images/'.self::id($r).'.bin',self::MAX_IMAGE_BYTES);
-                if($body===null)throw new RuntimeException('private_media_retirement_unverified');
-                $this->directory($this->root.'/retired-member-images');
-                $audit=function($evidence)use($r) {
-                    $record=array('schema'=>1,'operation'=>'verified_public_mirror_retirement','preparedAt'=>$this->now(),
-                        'requestId'=>self::id($r),'privateCopy'=>'images/'.self::id($r).'.bin')+$evidence;
-                    $this->writeFile($this->root.'/retired-member-images/'.self::id($r).'.json',json_encode($record,JSON_THROW_ON_ERROR));
-                };
-                if($attachments->retireMemberImage($r,$entry['data'],$body,$audit))$retired++;
-                continue;
-            }
             if(!$entry || $attachments->url($r,$entry['data'])!==null)continue;
             if($scanned>=$limit)break;
             $scanned++;
@@ -208,7 +183,7 @@ final class PintogyaDisplayCache {
                 if($error->getMessage()!=='activity_display_pending')throw $error;
             }
         }
-        return array('scanned'=>$scanned,'written'=>$written,'retiredPrivate'=>$retired);
+        return array('scanned'=>$scanned,'written'=>$written);
     }
 
     public function enqueue($request,$demand = false) {
@@ -348,7 +323,7 @@ final class PintogyaDisplayCache {
                 if($this->diskBytes()-$previousImage+$bytes > self::MAX_DISK_BYTES) { throw new RuntimeException('display_cache_disk_full'); }
                 $data = array('contentType'=>$image['contentType'],'size'=>$bytes,'sha256'=>hash('sha256',$image['body']));
                 $this->writeFile($imagePath, $image['body']);
-                if($job['request']['kind']==='public_image')$this->attachments()->store($job['request'],$data,$image['body'],$now);
+                $this->attachments()->store($job['request'],$data,$image['body'],$now);
             } elseif(str_ends_with($job['request']['kind'], '_image')) { throw new RuntimeException('display_cache_image_required'); }
             $entry = array('schema'=>2,'id'=>self::id($job['request']),'issuedAt'=>$now,'expiresAt'=>$expiry,
                 'digest'=>hash('sha256',json_encode($data,JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR)),'data'=>$data);
@@ -440,7 +415,6 @@ final class PintogyaDisplayCache {
             foreach($this->jobFiles() as $path) {
                 if($removed >= $limit) { break; }
                 $job = $this->job($path);
-                if($job&&$job['request']['kind']==='member_image'&&$this->regular($this->root.'/images/'.self::id($job['request']).'.bin')) { continue; }
                 if($job && (!self::expired($job['expiresAt'],$now) || $job['leaseUntil'] > $now)) { continue; }
                 $id = basename($path, '.json');
                 call_user_func($this->remove, $this->keyForId($id));

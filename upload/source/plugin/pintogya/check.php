@@ -4,6 +4,6 @@ if(($operation ?? ($_GET['operation'] ?? '')) === 'delete') {
     require_once __DIR__.'/lib/uninstall_guard.php';
     try { PintogyaUninstallGuard::assertCanUninstall(); }
     catch(RuntimeException $error) {
-        cpmsg('请先通过插件解除有效账户连接，并等待或取消未过期的扫码请求，再卸载。插件数据会保留，不会自动清空。','action=plugins','error');
+        cpmsg('相关业务表仍有记录，按原有规则拒绝卸载。停用插件不会删除数据；请先核对远端撤销与数据处置，不要直接清表来绕过检查。','action=plugins','error');
     }
 }

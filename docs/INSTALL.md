@@ -54,8 +54,8 @@ These are example commands, not proof of a successfully installed scheduler. `--
 
 - Verify the current/target lineage and migration notes before upgrading. Do not install this generic lineage over an existing customized integration without a reviewed migration path.
 - Use the native disable operation to stop normal use. Stop the installation's scheduled worker too; disabling is not a promise that historical data was deleted.
-- Unlink active connections and resolve/expire pending QR requests before uninstalling. The candidate includes a pre-delete check because native registration removal precedes the uninstall hook.
-- Uninstall preserves plugin tables and installation identity by default. It is not a data-erasure or remote-revocation tool. The lifecycle behavior still needs its native gate before it can be called verified.
+- The working source preserves the original rule: records in any of the twelve checked business tables refuse uninstall, including historical/revoked records, not only active sessions. Unlinking alone may therefore be insufficient. Use native disable to stop use; do not clear business records merely to bypass the guard. A pre-delete check applies the same condition before DX removes registration.
+- Only after all those checked tables are empty does uninstall remove the original twelve-table list. It does not erase nonempty business data or perform remote revocation. The installation identity and tables outside that original list are not silently removed. This working policy has synthetic checks, not a fresh native-uninstall pass.
 - Do not delete/regenerate the installation UUID to repair a hostname or database error. Reward keys use the stable installation namespace; resetting it can change entitlement identity. Copying a database to a new database name/prefix needs a deliberate migration, not automatic adoption.
 
 ## Troubleshooting
@@ -67,7 +67,7 @@ These are example commands, not proof of a successfully installed scheduler. `--
 | Installation-identity/database-scope error | Successful lifecycle hook, configured database and prefix | Clear identity or reward tables to force adoption |
 | Token-key error | Same secret supplied to web/CLI; private-file policy | Print the key or disable key-file checks |
 | Private-cache directory error | Outside-webroot provisioning, effective owner and PHP filesystem policy | Make it public/web-writable or fall back to live source reads |
-| `extension_not_verified` | Native/financial feature status in release notes | Remove the backend gate to make a button work |
+| Historical Alpha `extension_not_verified` | Version-specific restrictions and the current source-fidelity notes | Treat an older closed-feature test as proof of the full working feature set |
 | `outcome_unknown` | Sanitized state and authoritative records | Blindly replay writes |
 
 For repeated gate failures, retain evidence and follow the bounded acceptance in [STATUS.md](STATUS.md). A successful component test, packager or cache diagnosis does not reset an exhausted native-install gate.

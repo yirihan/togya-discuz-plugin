@@ -60,7 +60,7 @@ if(submitcheck('instantoperationssubmit')) {
         $_G['setting'],$forum,$credits,$tables,$permissions,$usergroups); }
     catch(Throwable $error) { cpmsg('启用失败：请核对新版 InnoDB 表、两类默认金额及 DX 版块/用户组特殊主题权限。同步和已有权益结算不依赖旧奖池、截止或审核表。',$instantMessageUrl,'error'); }
     $saveInstantSettings($changes,$settingGuard);
-    cpmsg('设置已保存；未发放积分。后台同步由 Togya Plugin 独立维护入口运行，未验收的原生扩展和积分结算仍由后端关闭。',$instantMessageUrl,'succeed');
+    cpmsg('新发布、只读同步和两类奖励结算开关已分别保存；未发放积分或修改旧六任务。后台维护还须由 Togya Plugin 独立维护入口调度运行。',$instantMessageUrl,'succeed');
 }
 
 if(submitcheck('instantdefaultssubmit')) {
@@ -177,7 +177,7 @@ foreach(array('publication'=>array('新发布与扫码参与',PintogyaActivitySe
     showsetting($control[0],'instant_operations['.$operation.']',
         (string)($_G['setting'][$control[1]] ?? '0')==='1' ? 1 : 0,'radio');
 }
-echo '<tr><td colspan="2">三项分别控制。当前通用候选的原生扩展和积分结算尚未开放，后台由独立维护入口运行。保存默认金额不代表启用奖励；未知或权限不足保持待同步，不放宽权限、来源核验或入账幂等。</td></tr>';
+echo '<tr><td colspan="2">三项分别控制，保存默认金额不改变开关。自动奖励需正式首次打卡事实、持续只读授权和 Togya Plugin 独立后台调度；开关为“是”不代表来源已就绪或积分已到账。会员不必回论坛领取，未知或权限不足显示待同步。关闭发布或暂停同步不清除既有待付权益；不使用旧审核或奖池维护。</td></tr>';
 showsubmit('instantoperationssubmit','保存运行开关'); showtablefooter(); echo '</form>';
 $defaults=null;
 try { $defaults=PintogyaActivityInstantConfig::defaultsFromJson($_G['setting'][PintogyaActivityInstantRule::SETTING_KEY] ?? '',$credits); }

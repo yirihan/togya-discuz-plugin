@@ -1,86 +1,29 @@
 # Release Status
 
-**Working source candidate: `1.0.0-alpha.8-x5`, not published. Latest downloadable candidate: Alpha.7. Neither is RC/stable or production-supported.** Actual downloadable assets are listed on [GitHub Releases](https://github.com/yirihan/togya-discuz-plugin/releases); a local build is not a publication receipt. Alpha.6 and earlier are unsafe for real private member-image content: static copies bypass authentication. See [upgrade and legacy-copy limitations](UPGRADING.md).
+## Current Distribution
 
-## Source Fidelity Correction
+Program version: **`1.0.0-x5`**. The owner explicitly confirms that the authoritative local behavior has already been discussed and actually tested, and requests anonymization/portability only, without another behavior redesign or repeated end-to-end acceptance.
 
-The final generic edition must preserve the authoritative local implementation's existing features and business rules. Only anonymization and necessary DX portability adaptations are in scope. Historical Alpha capability closures are not the final product contract. Alpha.8 working source removes those extra task/interaction/reward closures and the added zero-only publication restriction, while retaining native permissions, operator settings, transactions and idempotency. Thirteen restored rule/guide-method token comparisons and 47 portable checks pass; this does not establish full-plugin parity or executed payments. Six original task adapters, their icon and nine reviewed tutorial images are restored; task metadata/guide-path checks pass for all six, and eleven packaging checks pass. Native task registration/completion/payment and remaining adaptation differences are not yet verified. The historical ledger below describes immutable older candidates and is not acceptance of the expanded working source. No Alpha.8 download is published.
+This version retains the original account, six-task, activity, interaction, reward, static-image and uninstall rules. It removes the extra closures and zero-only publication restriction introduced by experimental generic Alpha builds. See [source fidelity](SOURCE_FIDELITY.md).
 
-| Stage | Status | Evidence / next gate |
+Release publication and exact archive/commit identities are recorded in the GitHub release notes and a subsequent receipt update. The archive's documentation is the pre-publication snapshot, not evidence that upload has already occurred.
+
+## Evidence Scope
+
+| Area | Evidence | Limit |
 | --- | --- | --- |
-| P0 Baseline and contract | Complete | Fixed extraction inventory and dependency review kept private; public compatibility and architecture contracts present |
-| P1 Public introduction | Published | Public visibility, README content and 0BSD license read back through GitHub; clean independent history |
-| P2 Installation candidate | Basic lifecycle checks passed; coverage limitations retained | One explicitly authorized additional fresh install passed for alpha.1; alpha.2 upgrade and normal uninstall passed. Active-binding denial-message capture remains unverified; two configurations have synthetic, not dual native-install coverage |
-| Intermediate Alpha publication | Published, not RC | Public source commit `b1f28ff0942c2250f8916ac1601451232f3d4da0`, tag `v1.0.0-alpha.3-x5`, prerelease assets read back and downloaded checksum verified |
-| P3 Basic RC | Scoped native/cache/browser checks passed; RC incomplete | Approved controller retest passed; Alpha.7 private-media fix validated separately. Release-candidate identity and packaging still pending |
-| P4 Optional native extensions | Deferred under the allowed downgrade | Task/interaction/credit backends remain closed; no support or financial-concurrency claim |
-| P5 Stable release | Not started | Clean ZIP, Linux extraction, regression evidence and downloaded checksum |
+| Local behavior | Owner confirms prior discussion and actual testing | Not relabeled as a new test performed by this release task |
+| Rule/guide/image bodies | Selected PHP-token comparisons against the local authority; comments/whitespace ignored | Scoped equivalence, not all possible runtime paths |
+| Task payload | Six classes, original icon and nine original example guides restored; class/guide paths checked | No new task creation, completion or payment performed by packaging |
+| Generic installation scope | Database/prefix-bound identity, hostname independence and reward namespace checks | Existing customized data are not silently adopted |
+| Uninstall | All original twelve checked tables refuse if nonempty; original empty cleanup list | Synthetic SQL adapter checks; exhausted native lifecycle gates are not rerun |
+| Stock DX adapter | Existing native PC/Touch controller, marker and zero-source display evidence retained for unchanged integration paths | Provider/camera and broader version matrices are not newly certified |
+| Release hygiene | PHP/JS syntax, explicit payload allowlist, anonymization, checksums and download readback | These do not claim a fresh full production-install or payout test |
 
-## Verification Ledger
+Historical Alpha installation, HTTP, cache, browser and download receipts remain in Git history, changelog and immutable release notes. Their old feature-disabled results do not represent this version's full feature set. The bounded native install/controller exceptions were consumed once; active-binding uninstall prompt capture was not fully verified and is not relabeled passed.
 
-| Gate | Attempts | Result | Limitation |
-| --- | --- | --- | --- |
-| Private extraction inventory | 1 | Passed | Not installation proof |
-| Runtime/container availability | Dedicated environment provisioned | Available | Isolated Linux VM, 2 CPUs/2 GiB; PHP 8.2.34 and MySQL 8.4.11, non-root PHP runtime; existing default context unchanged |
-| Public documentation privacy | 1/3 | Passed for published snapshot | Documentation/metadata and local links checked; new documentation changes are checked before each upload |
-| GitHub public/name/content readback | 1/3 | Passed | Repository PUBLIC, expected README read back; license recognized as 0BSD |
-| Local candidate syntax | 1/3 | Passed | Linux PHP 8.2.34 linted 175 runtime PHP files; 10 JavaScript files checked; no runtime installation proof |
-| Generic installation/unit boundaries | 1/3 | Passed | 33 synthetic checks; not a real database or DX install |
-| Official core fixture | 1 | Prepared, not plugin-install proof | Official X5.0.4 Intl 20261010 schema/seed; 4,995 original core files compared without modification |
-| Native plugin installation | Original 3 + one explicitly approved exception | Additional alpha.1 installation passed | Eleven InnoDB plugin tables, valid installation identity, disabled by default; not a fresh-install certification of later alpha.2 |
-| Prerequisite repair diagnosis | Targeted diagnosis only | No error in native cache prerequisites | Official UC schema added; fixture now has 300 InnoDB tables; native plugin/setting/style cache diagnosis succeeds. This is not a fourth installation attempt |
-| CLI bootstrap/negative arguments | 1/3 | Passed synthetically | Five regression cases, including native-style global cleanup; not a real scheduler execution proof |
-| Packaging tooling | 1/3 | Passed | Eight synthetic tests; two private builds byte-identical; Linux extraction verified the full payload manifest and zero Apple sidecars; development archives predate later documentation changes |
-| Binding/session components | 1/3 | Passed, synthetic only | 16 cases/42 assertions with real model classes, in-memory storage and fake API; no network, SQL, native login or install proof |
-| Supervisor components | 1/3 | Passed, process isolation only | Six child-process cases, including timeout, output cap and malformed response; no DB-lock or cron proof |
-| QR components | 1/3 | Passed, offline only | Six URL/MIME/render cases using the bundled SVG renderer; no real camera or Togya approval proof |
-| Native enable/disable | 1 each | Passed on isolated fixture | Not a PC/Touch or authorization certification |
-| Native upgrade | 2/3 | Passed after targeted repair | alpha.1 to alpha.2, stable installation identity; strict migration allowlist now includes the plugin's own membership-sync table |
-| Active-binding uninstall | 3/3 | Not fully verified; no further automatic retry | Registration and binding survived, but the harness did not capture the expected denial message; nested native output buffers invalidate that part of the evidence |
-| Retained-data uninstall | 2/3 | Passed after fixture repair | Native delete flow completed the uninstall hook, removed registration and retained the synthetic binding; corrected AdminCP context and restored test metadata only, without re-running installation. Not a browser-authentication test |
-| Native maintenance | Initial failure, one repair/retest | Status and disabled run passed after repair | CLI must bind the global environment after DX bootstrap; wrong host rejected and unverified rewards skipped. No live-provider or enabled synchronization proof |
-| Generic canonical hosts | 1/3 | 44 focused assertions passed on macOS/Linux | alpha.3 shares the strict canonical-host validator across three activity constructors; removes an unintended www-only restriction. No origin or identity relaxation |
-| Native PC/Touch HTTP | Original 3 + one explicitly approved exception | Additional alpha.3 check passed 10/10 | Home/account for guest and synthetic member; CSRF/origin/guest-write/closed-extension checks; binding counts unchanged. Loopback TLS-termination model, not real TLS, visual or provider proof |
-| Native guest-read permissions | 3/3 | Passed 6/6 | Public topic allowed; private forum, high readperm, hidden first post, deleted thread and password forum denied. Missing native usergroup cache fixed without changing permission values; synthetic SQL fixtures rolled back |
-| Disk-cache/display adapters | 1/3 | Passed on macOS/Linux | 12 scenarios/21 assertions, real private files with synthetic clock/cache/binding callbacks; zero upstream calls. No full browser or multi-process proof |
-| Native SQL binding | 1/3 | Passed 9/9, 19 assertions | Actual repository/transactions, synthetic upstream and unused synthetic UIDs; pending, wrong session, encrypted approval, idempotency, owner conflict, expiry and revoke recovery; original binding count restored |
-| Cached activity renderer | 1/3 | Passed 5/5, 7 assertions | Actual renderer, native SQL mapping and disk cache; warm/cold/denied and mobile context, locked instructions hidden; zero transport calls; synthetic payload/key, no browser-layout proof |
-| Anonymous live public API | One read only | Passed | One public example GET validated by the candidate, no account/challenge writes; does not prove real QR approval |
-| Enabled public synchronization | One startup failure, one retry | Passed 5/5 | Actual child process/default private cache with synthetic key, anonymous live example, cross-process scheduler lock; two tasks in 2.68 seconds and status readback. No active member credentials |
-| Native admin example publication | Alpha.3 baseline and Alpha.4 targeted regression | Passed 9 scenarios/14 assertions | Actual model/permissions with synthetic source/publisher and zero rewards. Repository commit calls adapted to savepoints for rollback; not native commit, browser or credit-grant proof |
-| Stock view/marker upgrade | Alpha.4 targeted regression | Passed | Unmodified stock special-thread dispatcher selects plugin; old mapped marker converts, repeat is a no-op, edited trailing-space body survives. Pure format/closed-backend unit checks also pass |
-| Alpha.4 native upgrade | Remaining third native upgrade check | Passed | Version/identity/table engine checks pass, enabled state preserved, eight verified migrations. No additional installation attempt |
-| Alpha.5 member composer adapter | Initial + one fixture repair/retest, 2/3 | Passed 8 scenarios/17 assertions | Real native model, standard callbacks and publication repository; synthetic session/source/member context. Canonical draft/completion, duplicate completion, tampering, changed session, attachment/funding rejection, missing context, moderation and closed rewards. Initial second post hit the native flood lock; the fixture releases only its synthetic identity's lock between cases, with permission/settings unchanged. Savepoints replace commits; not full controller HTTP, browser, real approval or payout proof |
-| Alpha.5 full member controller HTTP | Original 3 + separately approved single retest, consumed once | Passed original 4/4 | Original fixed Alpha.5 candidate: all 216 program hashes matched. Native authentication/controller and actual SQL commits, synthetic certificate-verified HTTPS provider. PC/Touch publication 301, duplicate refusal 503 without extra topic, guest API refusal 400. Native 503 is a refusal, not a normal success page. Original Touch failures were formhash-parser attribute ordering. No installation, additional cases, real provider/camera or public TLS proof; synthetic rows removed. No further automatic retry |
-| Member-cache native integration | 1/3 | Passed 6/6, 18 assertions | Actual SQL session/repository, private disk and default HTTPS client with synthetic provider; cache-root-only static-test injection. Four snapshots filled; warm/cold foreground zero-source, projection separation, other member/generation/revocation checked; SQL rolled back. In-process CLI, not scheduler-child/member-HTTP/participation or payout proof |
-| Alpha.6 native browser display/media | One mobile-emulation fixture failure, one repair/retest | Passed 4/4 | Real native PC and 390px Touch page, actual local PNG decode/PC zoom trigger, locked instructions and exact marker absent, no horizontal overflow, source headers zero; native high-readperm denial hides content while retained cache still exists. Synthetic data, loopback TLS-termination routing, not public TLS or member posting. Fixture invalid style repaired once with existing stock style/native cache builder, without changing core or permission values |
-| Alpha.6 focused regressions | 1/3 | Passed | Eight storage checks on macOS/Linux, 53 portable boundary checks, 177 runtime PHP files linted on Linux; exact edited/reply/other-topic marker preservation. Does not reset the exhausted Alpha.5 member-controller gate |
-| Alpha.6 native metadata upgrade | 1/3 for this candidate | Passed | Native upgrade hook, name/version, preserved enablement, valid installation identity, eleven plugin tables/all InnoDB and uninstall precheck verified. This is not another fresh-install or exhausted uninstall retry |
-| Alpha.7 private-media disk boundary | 1/3 | Passed 6 cases/16 assertions on macOS/Linux | Actual storage, verified legacy retirement, evidence-before-removal, retained private bytes, tamper/audit failure refusal and expired identity retention; synthetic images |
-| Alpha.7 protected native HTTP | 1/3 | Passed 5/5 | Authorized POST PNG/no-store/zero source reads; guest, nonparticipant, revoked binding and high-readperm refused; verified old mirror guest 200 becomes 404; ordinary public image remains 200. Synthetic SQL/session/cache fixtures cleaned, not real provider proof |
-| Alpha.7 browser private transport | 1/3 | Passed | Actual candidate JS and PNG decoding, synthetic endpoint responses. Fourteen POST image requests, valid payloads, maximum concurrency two, zero static-image GETs, invalid MIME refused, revoked Blob URLs and denied-view cleanup. Zoom delegation stub only; not native-page or real-provider proof |
-| Alpha.7 focused regression | 1/3 | Passed | Linux 177 runtime PHP files linted; portable 53 checks, attachment eight, cache 12 cases/21 assertions and supervisor six. No new install/uninstall/controller retries |
+## Compatibility
 
-The latest [Alpha.7 prerelease](https://github.com/yirihan/togya-discuz-plugin/releases/tag/v1.0.0-alpha.7-x5) targets `b397b0c27e8f88364e039dc42c9a65635a1dd93a`. ZIP SHA-256: `5a50c656610a8b67d20bd7bcaaa94c4723570bfcbfcdd0038e5c0773a47674c5`. Linux extraction and a fresh GitHub download verified all 235 payload hashes (236 entries), both synthetic preview images and zero Apple sidecars. All 234 actual payload blobs, including 216 program files, matched the release Git commit. GitHub reports published prerelease, not draft. This receipt is a later documentation commit; the immutable archive contains the pre-publication status snapshot. It remains experimental, not RC/stable.
+The package targets DX X5 and the checked official X5.0.4 Intl fixture, PHP 8.2+, HTTPS and InnoDB. No X3.x, every-DX-version, MariaDB or arbitrary-hosting certification is claimed. Native permission/setting checks remain; no complete official core files are distributed.
 
-The historical [Alpha.6 prerelease](https://github.com/yirihan/togya-discuz-plugin/releases/tag/v1.0.0-alpha.6-x5) targets `677bb17e1aa8abf708615a84a892d4c8be9fe938`. ZIP SHA-256: `67fbbece2989741147773342c71fd8559171c9ed3eab2e98e0fcac6e0ec3e551`. Its original download/manifest checks passed, but the later private-media finding makes it unsafe for real member-image content. Alpha.3, Alpha.4 and Alpha.6 release pages carry that warning; their assets are unchanged.
-
-The historical [Alpha.4 prerelease](https://github.com/yirihan/togya-discuz-plugin/releases/tag/v1.0.0-alpha.4-x5) targets `929d7b100f346071deef0f7ce5fa1aa571c5a3fe`. ZIP SHA-256: `76eb8060b7b853760ec0850467a068de2ed263fe6a6bede413fa293dd337cd38`. A fresh download matched the checksum and all 231 payload hashes (232 entries); all 215 program blobs matched the release Git commit. The Alpha.3 release notes now carry the discovered stock-view defect without replacing its assets.
-
-Portable closed-backend tests now require the exact `extension_not_verified` runtime error. A missing native-task function import in the earlier synthetic test could have counted as rejection; the import/assertion fixture was repaired and all 43 checks passed. This correction changes tests only, not the Alpha.4 program or its immutable ZIP.
-
-The invalid-CSRF negative test is accepted only for the plugin's explicit refusal or DX's exact native request-tainting refusal page. DX returns HTTP 503 for that native rejection before dispatch; it is not treated as a successful normal page or as proof that arbitrary 503 responses are safe.
-
-The Alpha program source is an experimental evaluation candidate. It is disabled by default, not a supported production installer. No RC or stable release exists. Optional native tasks/interactions/credit grants remain server-side disabled pending their own evidence. The rights holder confirmed public redistribution of the included Togya Logo and example illustrations; third-party notices remain intact.
-
-The [published Alpha](https://github.com/yirihan/togya-discuz-plugin/releases/tag/v1.0.0-alpha.3-x5) ZIP SHA-256 is `8c9c6870327cfcd212b343dd6e3e2c2e5cd7a40bad49fa6756d782a72ba48905`. A fresh download matched the checksum asset and all 229 internal payload hashes (230 ZIP entries); Apple sidecars were absent. This receipt applies to that immutable Alpha, not a later source tree or an RC/stable release.
-
-Publishing Alpha source/package is an intermediate delivery, not completion of P3 or the stable goal. Approved one-shot installation, Alpha.3 HTTP and Alpha.5 controller exceptions have each been consumed once; original failures remain and no automatic retry is authorized. Normal uninstall passed; active-binding uninstall prompt capture remains unverified after three attempts, with registration/data retention observed. Two configurations have synthetic isolation coverage but only one has native lifecycle evidence. Private-media HTTP and browser coverage is separated above; member scheduler-child/participation and real camera/provider approval are not claimed. Alpha.4's immutable member composer stays closed; later candidates contain the before-model adapter. Optional native tasks/interactions/rewards remain backend-closed. Alpha.7 cannot safely identify old public files after all identity records/private bytes are lost; operator review is mandatory for such legacy storage, not a waived privacy gate.
-
-## Bounded Acceptance
-
-Freeze candidate and checklist before testing. For the same failure: one initial run plus at most two targeted repair/retest rounds. Reuse valid unchanged-candidate evidence; do not continuously expand requirements.
-
-If unresolved, record cause, impact, next action and downgrade. Options: documentation preview, basic RC, disabled optional modules or delayed marketplace submission. Privacy leaks, authorization bypass and unsafe/duplicate credit writes cannot be downgraded to a pass.
-
-Built, packaged, installed, launched, tested, uploaded, released, submitted and approved are different states. A repository or static test does not prove end-to-end functionality.
+GitHub source publication, a downloadable package and marketplace submission are different states. No DX application-center submission or approval is claimed.

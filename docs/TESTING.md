@@ -25,7 +25,7 @@ PHP requires the same extensions as the candidate; the supervisor/CLI checks cre
 
 An isolated complete X5.0.4 Intl 20261010 fixture with PHP 8.2.34/MySQL 8.4.11 was used for the scoped lifecycle, HTTP, guest permissions, SQL binding and cached-renderer checks recorded in [STATUS.md](STATUS.md). Official core files were not changed. The fixture/configuration, accounts, cookies, generated keys, logs and private QA workspace are not distributed.
 
-Reproducing those checks requires a fresh disposable official DX installation and synthetic identities, not a partial forum SQL import or a copied live database. Use native AdminCP lifecycle/cache behavior, the same Web/CLI identity, and an outside-webroot private cache. Keep native/financial modules closed; do not infer financial or concurrency acceptance from these tests.
+Reproducing those checks requires a disposable official DX installation and synthetic identities, not a partial forum SQL import or a copied live database. Use native AdminCP lifecycle/cache behavior, the same Web/CLI identity, and an outside-webroot private cache. Preserve the original native/financial permissions and operator settings; these tests do not independently establish financial or concurrency acceptance. The distribution reuses the owner's confirmed local behavior rather than repeating or redesigning it.
 
 ## Bounded Failures
 

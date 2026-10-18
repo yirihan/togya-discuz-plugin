@@ -1,72 +1,30 @@
 # Togya Plugin
 
-**Bring shared learning journeys into your Discuz X5 community.**
+Bring Togya account linking, native tasks and shared learning activities into Discuz X5.
 
-[简体中文](README.zh-CN.md) · [Release Status](docs/STATUS.md) · [Compatibility](docs/COMPATIBILITY.md) · [Privacy](docs/PRIVACY.md)
+[简体中文](README.zh-CN.md) · [Download](https://github.com/yirihan/togya-discuz-plugin/releases/tag/v1.0.0-x5) · [Installation](docs/INSTALL.md) · [Source Fidelity](docs/SOURCE_FIDELITY.md)
 
-Togya Plugin is a developing integration between Discuz X5 forums and [Togya](https://togya.com). It is designed to connect forum accounts, turn supported Togya activities into forum topics, and show authorized progress inside the community.
+## Features
 
-**Latest downloadable experimental candidate: `1.0.0-alpha.7-x5`, not an RC or a production-supported release.** Downloadable artifacts and checksums, when published, are listed on [GitHub Releases](https://github.com/yirihan/togya-discuz-plugin/releases). See the [synthetic UI previews](docs/PREVIEW.md) and [upgrade notes](docs/UPGRADING.md). Alpha.6 and earlier can expose member-image caches through static URLs after synchronization: do not use them with real private content. Alpha.7 protects new member images and retires verified legacy mirrors; missing legacy identity records require operator review before reuse.
+- Link/unlink forum accounts through Togya QR approval.
+- Six native task adapters with original periods, conditions and tutorial images.
+- Native activity topics, PC/Touch stages, progress, participants and check-ins.
+- Native comments/ratings and configured rewards retain their existing permission, transaction and duplicate-entitlement rules.
+- Local display cache and bounded background synchronization; opening a topic does not synchronously fetch its activity content from Togya.
+- Generic forum labels, database-bound installation identity and a plugin-owned maintenance entry point.
 
-The unpublished Alpha.8 working source is being aligned with the authoritative local feature/rule set: anonymization and DX portability only, not feature removal. Historical Alpha restrictions are not the final feature contract; see [current status](docs/STATUS.md).
+**Version: `1.0.0-x5`.** This is an anonymized, portable distribution of the authoritative local implementation, not a redesigned or reduced feature set. It retains the local image behavior: feeds render ordinary DX static attachment URLs. Earlier experimental Alpha feature closures and private-image changes are not this version's behavior baseline.
 
-The [operator guide](docs/INSTALL.md) covers intended installation, key management, maintenance, upgrade and uninstall behavior. Use a disposable complete DX X5 instance; no production installation is certified.
+## Install
 
-## Planned Capabilities
+Read [English installation](docs/INSTALL.md) or [中文安装说明](docs/INSTALL.zh-CN.md). Upload the complete `upload/` tree, install through native AdminCP, configure the forum/usergroup/credit settings and secret management, refresh native caches, and configure maintenance under the Web PHP user.
 
-| Capability | Intended behavior | Standalone release status |
-| --- | --- | --- |
-| Account linking | Session-bound QR approval and encrypted credentials; unlink safely | Native SQL with synthetic provider passed; real camera/provider approval not run |
-| Activity topics | Native forum topics with authorized Togya content | Stock before-model adapter; eight native-model scenarios and four native PC/Touch controller HTTP checks pass with synthetic upstream and zero rewards. Real provider approval is not verified |
-| Progress display | Authorized stages and check-ins through PC and Touch views | Synthetic native PC/Touch browser pages, local PNG decode, PC zoom trigger and warm-cache permission denial passed; member-media and real-provider coverage not claimed |
-| Background synchronization | Thread display reads local caches, without synchronous Togya calls | Enabled CLI cached an anonymous live public example; process locking/batch/status checked. Member synchronization not certified |
-| Native tasks and interactions | Optional task checks and native discussion/rating integration | Separate integration gate; not promised as drop-in |
-| Credit rewards | Administrator-configured rewards, transactions and duplicate-payment protection | Disabled until dedicated financial tests pass |
+The package adds the plugin, six specifically named custom task classes and one task icon. It does not include complete official core files, customer configurations, credentials or business data. Use native task settings; uploading adapters does not create funded tasks or issue credits.
 
-These are scoped results, not complete end-to-end certification. The plugin is disabled by default; optional tasks, native interactions and credit grants remain backend-disabled. See the [evidence-backed status](docs/STATUS.md).
-
-## A Forum Extension, Not A Core Replacement
-
-- The internal identifier remains `pintogya` for route and protocol compatibility. The display name is **Togya Plugin**.
-- Package files live under `upload/source/plugin/pintogya/`; it does not distribute a complete Discuz installation.
-- It must not depend on private maintenance frameworks, fixed customer domains or database names.
-- The forum's own reading, posting, moderation and credit permissions remain authoritative.
-- Features needing extra core integration must be identified explicitly and rejected server-side when integration is missing.
-
-## Requirements And Setup
-
-The target is **Discuz X5, PHP 8.2+, HTTPS and transactional InnoDB tables**. This is a requirements statement, not certification of every version combination. X3.x compatibility has not been established.
-
-For an isolated evaluation:
-
-1. Verify the exact supported DX/PHP/database combination and back up the forum.
-2. Upload the release package and install through Discuz AdminCP.
-3. Configure the canonical HTTPS origin, forum, publisher groups and credit fields using native controls.
-4. Run plugin-owned background synchronization as the web-service account.
-5. Refresh all Discuz caches through AdminCP; verify PC and Touch behavior.
-
-No credentials, account data or customer configuration will be included. Operators need their own configuration and permitted access to Togya's service. Synthetic fixtures do not prove a real authorization flow succeeded.
-
-## Staged Delivery
-
-1. **Introduction preview:** architecture, privacy boundaries and release plan.
-2. **Installation candidate:** general configuration plus isolated fresh-install, disable and uninstall checks.
-3. **RC:** downloadable package, fixed source manifest, checksums and known limitations.
-4. **Optional extensions:** separately qualify tasks, interactions and rewards; unverified modules stay disabled server-side.
-5. **Stable:** tested ZIP, upgrade/recovery guidance and downloaded checksum verification.
-
-Marketplace submission is separate from a GitHub release. A draft or submission is not an approved listing.
-
-## Security And Data
-
-Read [Privacy and Data Handling](docs/PRIVACY.md) before deployment. The design includes encrypted session credentials and locally retained authorized activity content, which can include photos; it is not a no-data-storage integration. Never post tokens, cookies, account records or raw production logs in issues. See [SECURITY.md](SECURITY.md).
+Target: **Discuz X5, PHP 8.2+, HTTPS and InnoDB**. See [compatibility](docs/COMPATIBILITY.md), [status](docs/STATUS.md), [upgrade notes](docs/UPGRADING.md), [privacy](docs/PRIVACY.md) and [synthetic previews](docs/PREVIEW.md). X3.x, MariaDB, arbitrary subdirectory/shared-hosting environments and every DX version are not independently certified.
 
 ## License
 
-Original project code is licensed under [0BSD](LICENSE). You may use, modify and redistribute it, including commercially, without an attribution or notice-retention condition under that license. No warranty is provided.
+Original code uses [0BSD](LICENSE): use, modify and redistribute, including commercially, without an attribution requirement. No warranty is provided. Third-party libraries, trademarks and platform badges retain their respective notices. Included Togya Logo and example illustrations are authorized for redistribution; see the package's `THIRD_PARTY.md`.
 
-Third-party components keep their own licenses and notices; 0BSD does not relicense them or the Discuz core. The package includes `THIRD_PARTY.md`; the owner confirmed redistribution of the included Togya product artwork. Third-party store marks are not relicensed.
-
-## Contributing
-
-Use synthetic data and reserved example domains in reports. Do not upload customer installations, backups or modified official core files. Read [CONTRIBUTING.md](CONTRIBUTING.md).
+Report issues with synthetic examples, version and sanitized errors. Never attach credentials, cookies or private production data.

@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.0.0-x5
+
+- Publish the authoritative local implementation as a generic DX X5 distribution: customer identities and host/database allowlists are removed, installation scope is database/prefix-bound, and maintenance has a standalone entry point.
+- Preserve existing account, six-task, activity, interaction, reward and uninstall rules. No release-only feature closures or zero-amount requirement. Include original task adapters, icon and nine example guide images.
+- Restore the local static-attachment image behavior and original browser renderer; no extra authenticated-Blob transport or member-image retirement. Alpha.7's different behavior is historical, not the release baseline.
+- Retain stock-DX composer/marker adaptation and fresh-install attachment-parent creation, without distributing whole official core files.
+- The owner confirms the local behavior was discussed and actually tested. Release checks cover anonymization, source differences, syntax and package integrity; no new all-wallet/device/provider or financial end-to-end certification is claimed.
+
+The following Alpha entries are historical and do not override the final source-fidelity contract.
+
 ## 1.0.0-alpha.8-x5 (Unpublished Working Source)
 
 - Align with the authoritative local feature/rule set: remove added capability closures for native tasks, interactions and rewards, and the added zero-only publication restriction. Native permission/configuration, transaction and idempotency checks remain.
@@ -7,6 +17,8 @@
 - Restore six original task adapters (customer copyright name anonymized), the shared icon and all nine original tutorial images. Guides contain synthetic/example identities; visual review and WebP chunk inspection found no customer identifiers or EXIF/XMP. Guide rendering matches the authority's PHP tokens, increasing scoped comparisons to thirteen.
 - The packager includes only the six named task adapters/icon outside the plugin tree, refuses missing/symlinked adapters and excludes unrelated official core. Eleven packaging checks and six task-class/guide-path cases pass; native task registration/completion/payment are not claimed by these checks.
 - Other portability differences and full native task behavior remain under review. No Alpha.8 archive is published. Historical Alpha evidence/disabled-feature behavior is retained as history, not the final feature contract.
+- Restore original uninstall refusal for any records in the original twelve checked tables, rather than only active bindings/challenges; empty-only cleanup uses the original table list. Native pre-delete integration remains. Synthetic adapter cases are not another native uninstall retry.
+- Restore native configuration explanations without the obsolete release-only closure claim. See [source-fidelity review](SOURCE_FIDELITY.md); the private-media security behavior difference is separately awaiting owner confirmation.
 
 ## 1.0.0-alpha.7-x5 (Experimental Source Candidate)
 

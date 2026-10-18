@@ -31,8 +31,13 @@ final class PintogyaMemberDisplaySession {
     }
     public function stageFeedReadOnly($uid,$activity,$stage,$version,$cursor='') { return $this->stageFeed($uid,$activity,$stage,$version,$cursor); }
     public function displayImageUrls($keys) {
-        // Private pixels are returned by the existing authenticated POST image controller, never a static URL.
-        return array_fill(0,count($keys),null);
+        if(!$this->feedRequest) { return array_fill(0,count($keys),null); }
+        $urls=array();
+        foreach($keys as $key) {
+            $r=$this->feedRequest;$r['kind']='member_image';$r['media']=$key;
+            $urls[]=$this->cache->imageUrl($r);
+        }
+        return $urls;
     }
     public function displayImageContext($uid,$activity,$locale,$version,$stage,$cursor) {
         $this->imageContext=array($uid,$activity,$locale,$version,$stage,$cursor);

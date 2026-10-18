@@ -388,7 +388,7 @@ class threadplugin_pintogya {
             .$viewer
             .$publicParticipants
             .'<script defer src="source/plugin/pintogya/static/activity-interactions.js?1.0.0-alpha.1-x5"></script>'
-            .'<script defer src="source/plugin/pintogya/static/activity-view.js?participation-state-20261006&amp;private-media=1.0.0-alpha.7-x5"></script>'
+            .'<script defer src="source/plugin/pintogya/static/activity-view.js?participation-state-20261006&amp;display=1.0.0-x5"></script>'
             .'<script defer src="source/plugin/pintogya/static/activity-public.js?1.0.0-alpha.1-x5"></script>'
             .'<a href="https://app.togya.com/#/activities/'.$escape($id).'" target="_blank" rel="noopener noreferrer">'
             .$escape($lang['activity_view_open']).'</a>'

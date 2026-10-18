@@ -1,5 +1,13 @@
 # Alpha Upgrade Notes / Alpha 升级说明
 
+## 1.0.0-x5 Distribution
+
+This release follows the authoritative local behavior, not the experimental Alpha capability closures or Alpha.7 private-image transport. Account/task/activity/interaction/reward conditions are retained; image feeds use ordinary static DX attachment URLs. There is no automatic member-image mirror retirement in this release. Earlier sections below document historical Alpha-specific behavior only.
+
+For a fresh generic installation, upload the complete `upload/` tree, including the six named task classes/icon. For an existing generic Alpha installation, stop its worker, retain the same encryption key and installation identity, upload the release, run native AdminCP plugin upgrade and refresh all native cache types before restarting maintenance. Do not overwrite an unrelated customized installation or auto-adopt existing business tables; its namespace/data need a deliberate migration. The release does not modify the user's existing local/production sites.
+
+`1.0.0-x5` 按本地已确定行为脱敏发行，不沿用早期 Alpha 的功能关闭和图片鉴权改造。保留原任务、互动和奖励规则，图片走普通 DX 静态附件地址，不自动清理会员图公开副本。旧 Alpha 专项说明仅供历史追溯，不代表本版行为。
+
 These are experimental fresh-lineage candidates, not a migration path for an existing customized integration or a production-support claim. Use a disposable test instance first. Stop its scheduler and keep native task/interaction/credit-grant features closed.
 
 ## Alpha.6 And Earlier To Alpha.7: Private Images

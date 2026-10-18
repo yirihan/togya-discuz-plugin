@@ -12,6 +12,7 @@ final class DB {
     public static $identity = null;
     public static $rows = 0;
     public static $writes = 0;
+    public static $drops = 0;
     public static $engine = 'InnoDB';
     public static function table($name) { return self::$prefix.$name; }
     public static function result_first($sql,$args=array()) {
@@ -22,6 +23,7 @@ final class DB {
         if(strpos($sql,'information_schema.TABLES')!==false) { return 1; }
         if(strpos($sql,"WHERE state_code='active'")!==false || strpos($sql,"WHERE state_code='pending'")!==false) { return 0; }
         if(strpos($sql,'SELECT 1 FROM `')===0) { return self::$rows > 0 ? 1 : 0; }
+        if($sql==='SELECT COUNT(*) FROM %t') { return self::$rows; }
         throw new RuntimeException('unexpected_synthetic_query');
     }
     public static function fetch_first($sql,$args=array()) {
@@ -36,7 +38,10 @@ final class DB {
         if($table!=='common_setting' || self::$identity!==null) { throw new RuntimeException('unexpected_synthetic_write'); }
         self::$writes++; self::$identity=$row['svalue']; return 1;
     }
-    public static function query($sql) { throw new RuntimeException('unexpected_mutation'); }
+    public static function query($sql) {
+        if(preg_match('/\ADROP TABLE IF EXISTS `[A-Za-z0-9_]+`\z/D',$sql)) { self::$drops++;return; }
+        throw new RuntimeException('unexpected_mutation');
+    }
 }
 function updatecache($name) {
     if($name!=='setting') { throw new RuntimeException('unexpected_cache_update'); }
@@ -136,6 +141,9 @@ check($metadata['version']===PintogyaInstallation::VERSION,'version_consistency'
 $modules=unserialize($metadata['modules'],array('allowed_classes'=>false));
 check(is_array($modules)&&$modules[0]['menu']==='Togya Plugin','serialized_menu_length');
 check($metadata['available']==='0','default_disabled');
-$writes=DB::$writes;$finish=false;include $root.'/uninstall.php';
-check($finish===true && DB::$writes===$writes,'uninstall_preserves_data');
+$writes=DB::$writes;$finish=false;DB::$rows=1;
+rejects(static function()use($root){include $root.'/uninstall.php';},'nonempty_uninstall_refused','pintogya_uninstall_requires_verified_remote_revoke');
+check(DB::$drops===0&&DB::$writes===$writes,'nonempty_uninstall_does_not_mutate');
+DB::$rows=0;include $root.'/uninstall.php';
+check($finish===true&&DB::$writes===$writes&&DB::$drops===count(PintogyaUninstallGuard::TABLES),'empty_only_original_cleanup');
 echo json_encode(array('scope'=>'synthetic unit checks; not a real X5/database installation','checks'=>$checks,'passed'=>true)).PHP_EOL;

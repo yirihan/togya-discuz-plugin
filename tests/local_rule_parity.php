@@ -34,6 +34,9 @@ $scope=array(
     'lib/activity_settlement.php'=>array('settle','settleTimeout','assertSettlementEnabled'),
     'lib/activity_publish.php'=>array('issue','checkedReward'),
     'lib/activity_official_publish.php'=>array('publish'),
+    'lib/display_member.php'=>array('displayImageUrls'),
+    'lib/display_cache.php'=>array('imageUrl','materializeImages','complete','collect'),
+    'lib/display_attachments.php'=>array('url'),
 );
 $cases=array();$passed=true;
 try {
