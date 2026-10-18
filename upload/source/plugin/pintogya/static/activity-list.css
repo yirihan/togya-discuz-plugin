@@ -1,0 +1,13 @@
+.pintogya-list-marker[hidden], .pintogya-list-touch-cover[hidden], .pintogya-list-touch-cover img[hidden] { display: none; }
+.pintogya-list-marker { max-width: 100%; vertical-align: middle; }
+.pintogya-list-reward-inline { display: inline; margin: 0 4px; font-size: inherit; }
+.pin-ibook-card .pin-ibook-meta-row .pintogya-list-marker { display: inline-flex; }
+.pin-ibook-card .pintogya-list-participants { display: inline-flex; align-items: center; gap: 4px; }
+.pintogya-list-participants img { width: 14px; height: 14px; flex: none; }
+/* TOGYA_PLUGIN: pintogya_list_compact_pills; override native .ml span full width only here. */
+.pin-ibook-card .pin-ibook-meta-row .pintogya-list-participants,
+.pin-ibook-card .pin-ibook-meta-row .pintogya-list-marker { width: auto; flex: 0 1 auto; }
+.pin-ibook-card .pin-ibook-cover img[hidden] { display: none; }
+.pintogya-list-touch-cover { display: block; width: min(100%, 400px); aspect-ratio: 16 / 9; margin: 8px 12px; overflow: hidden; border-radius: 4px; background: #eef3f0; }
+.pintogya-list-touch-cover img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.pin-ibook-card .pin-ibook-cover img.pintogya-list-cover-image { object-fit: contain !important; background: #eef3f0; }

@@ -1,0 +1,62 @@
+.pintogya-page{max-width:880px;margin:24px auto;letter-spacing:0}
+.pintogya-task-view,.pintogya-task-view p,.pintogya-task-view figcaption{word-break:normal;overflow-wrap:break-word}
+.pintogya-disclosure{font-weight:700;line-height:1.65}
+.pintogya-tuple{display:grid;grid-template-columns:minmax(140px,220px) minmax(0,1fr);gap:8px 16px;margin:16px 0}
+.pintogya-tuple dt{font-weight:700}
+.pintogya-tuple dd{margin:0;overflow-wrap:anywhere}
+.pintogya-action-form{display:inline-block;margin:12px 12px 0 0}
+.pintogya-created{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:24px;align-items:center;margin:0 0 20px;padding:8px 0 20px;border-bottom:1px solid #d8d8d8}
+.pintogya-created-title{margin:0;max-width:460px;font-size:16px;line-height:1.65}
+.pintogya-qr-wrap{width:220px;height:220px}
+.pintogya-qr-wrap a{display:block;width:220px;height:220px}
+.pintogya-qr{display:block;width:220px;height:220px;background:#fff}
+.pintogya-open-fallback{display:inline-flex;margin-top:16px}
+.pintogya-created-touch{display:block;padding-top:0}
+.pintogya-touch{box-sizing:border-box;padding:0 12px}
+.pintogya-touch .pintogya-action-form{display:block;margin:12px 0 0}
+.pintogya-touch .pintogya-action-form .pn{box-sizing:border-box;width:100%;min-height:42px;height:auto;white-space:normal}
+.pintogya-task-panel{margin:16px 0;padding:16px;border:1px solid #d8d8d8}
+.pintogya-task-panel ul{margin:8px 0 8px 20px}
+.pintogya-task-guide{box-sizing:border-box;max-width:760px;margin:16px 0;padding:0}
+.pintogya-task-guide h4{margin:0 0 12px;font-size:16px;line-height:1.4}
+.pintogya-task-guide-ios{max-width:640px}
+.pintogya-task-guide-ios .pintogya-guide-shot{box-sizing:border-box;width:280px;max-width:100%;overflow:visible;border-radius:0;background:#fff;border-color:#d8dde6}
+.pintogya-task-guide-ios .pintogya-guide-shot img{height:auto;max-height:none;object-fit:contain}
+.pintogya-guide-step-shortcut .pintogya-guide-ring{left:85%;top:13.6%;width:11%;height:5.2%;border-radius:50%}
+.pintogya-guide-instructions{margin:12px 0 0;padding-left:24px;line-height:1.65}
+.pintogya-guide-instructions li{margin:6px 0}
+.pintogya-guide-steps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.pintogya-guide-step{min-width:0;margin:0}
+.pintogya-guide-shot{position:relative;overflow:hidden;border:1px solid #31363d;border-radius:7px;background:#000}
+.pintogya-guide-shot img{display:block;box-sizing:border-box;width:100%;height:auto}
+.pintogya-guide-ring{position:absolute;box-sizing:border-box;border:3px solid #36d98a;box-shadow:0 0 0 3px rgba(0,0,0,.78);pointer-events:none}
+.pintogya-guide-step-me .pintogya-guide-ring{left:52%;top:28%;width:20%;height:62%;border-radius:50%}
+.pintogya-guide-step-scan .pintogya-guide-ring{left:2.5%;top:7%;width:95%;height:85%;border-radius:18px}
+.pintogya-guide-number{position:absolute;left:10px;top:10px;display:flex;width:28px;height:28px;align-items:center;justify-content:center;border-radius:50%;background:#36d98a;color:#08150f;font-weight:700;line-height:28px;box-shadow:0 2px 7px rgba(0,0,0,.35)}
+.pintogya-guide-step figcaption{margin:8px 0 0;line-height:1.55}
+.pintogya-guide-same-phone{margin:14px 0 0;padding:10px 12px;border-left:4px solid #5a6de2;background:#f1f4ff;line-height:1.6}
+.pintogya-task-guide .pintogya-guide-note{margin:8px 0 0;line-height:1.6}
+.pintogya-task-guide-single{max-width:320px}
+.pintogya-task-guide-single .pintogya-guide-step{padding:0}
+.pintogya-task-guide-single img{display:block;box-sizing:border-box;width:100%;max-width:280px;height:auto;border:1px solid #d8dde6;border-radius:6px;background:#fff}
+.pintogya-task-guide-single figcaption{max-width:280px;margin:8px 0 0;line-height:1.55}
+.pintogya-platform-links{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 18px}
+.pintogya-platform-link{display:inline-flex;box-sizing:border-box;width:190px;height:64px;padding:4px 10px;align-items:center;justify-content:center;border:1px solid #d8dde6;border-radius:6px;background:#fff;box-shadow:0 2px 8px rgba(15,23,42,.12);text-decoration:none;overflow:hidden;transition:border-color .16s ease,box-shadow .16s ease,transform .16s ease}
+.pintogya-platform-link:hover,.pintogya-platform-link:focus{border-color:#4f72d8;box-shadow:0 4px 14px rgba(15,23,42,.18);transform:translateY(-1px)}
+.pintogya-platform-link img{display:block;height:auto;max-width:100%}
+.pintogya-platform-apple img{width:144px}
+.pintogya-platform-google img{width:164px}
+.pintogya-auto-status{margin:10px 0 14px;line-height:1.55}
+
+@media (max-width:640px){
+	.pintogya-page{margin:16px auto}
+	.pintogya-created{display:block;padding-top:0}
+	.pintogya-created-title{margin-bottom:14px;font-size:15px}
+	.pintogya-qr-wrap{display:none}
+	.pintogya-tuple{grid-template-columns:minmax(0,1fr);gap:4px;margin:12px 0}
+	.pintogya-tuple dd{margin:0 0 10px}
+	.pintogya-platform-links{display:grid;grid-template-columns:1fr}
+	.pintogya-platform-link{width:100%;max-width:240px}
+	.pintogya-task-guide{max-width:100%}
+	.pintogya-guide-steps{grid-template-columns:minmax(0,1fr)}
+}

@@ -6,27 +6,27 @@
 
 Togya Plugin is a developing integration between Discuz X5 forums and [Togya](https://togya.com). It is designed to connect forum accounts, turn supported Togya activities into forum topics, and show authorized progress inside the community.
 
-**Current publication: documentation preview. There is no supported installable release yet. Do not install an arbitrary repository snapshot on a production forum.**
+**Current candidate: `1.0.0-alpha.3-x5`, an experimental development preview, not an RC or a production-supported release.** The source and a checksummed Alpha package are being published in stages. See [GitHub Releases](https://github.com/yirihan/togya-discuz-plugin/releases) for assets actually available; do not infer publication from a local build.
 
-The [draft operator guide](docs/INSTALL.md) covers intended installation, key management, maintenance, upgrade and uninstall behavior without claiming those lifecycle gates passed.
+The [operator guide](docs/INSTALL.md) covers intended installation, key management, maintenance, upgrade and uninstall behavior. Use a disposable complete DX X5 instance; no production installation is certified.
 
 ## Planned Capabilities
 
 | Capability | Intended behavior | Standalone release status |
 | --- | --- | --- |
-| Account linking | Scan a QR code in Togya and explicitly approve an account-scoped connection; unlink safely | First RC target; not yet verified |
-| Activity topics | Authorized publishers connect a supported activity to a native forum topic | First RC target |
-| Progress display | Authorized stages and check-ins through PC and Touch views | First RC target |
-| Background synchronization | Thread display reads local caches, without synchronous Togya calls | Required; standalone scheduling in development |
+| Account linking | Session-bound QR approval and encrypted credentials; unlink safely | Native SQL with synthetic provider passed; real camera/provider approval not run |
+| Activity topics | Authorized publishers connect a supported activity to a native forum topic | Native publication flow still needs dedicated acceptance |
+| Progress display | Authorized stages and check-ins through PC and Touch views | Native HTML/access and cached-renderer subsets passed; visual/full media QA remains |
+| Background synchronization | Thread display reads local caches, without synchronous Togya calls | Disabled-runtime scheduling and bounded supervisor checks passed; enabled live synchronization not certified |
 | Native tasks and interactions | Optional task checks and native discussion/rating integration | Separate integration gate; not promised as drop-in |
 | Credit rewards | Administrator-configured rewards, transactions and duplicate-payment protection | Disabled until dedicated financial tests pass |
 
-These are capabilities being prepared, not claims of completed installation or end-to-end tests. See the [evidence-backed status](docs/STATUS.md).
+These are scoped results, not complete end-to-end certification. The plugin is disabled by default; optional tasks, native interactions and credit grants remain backend-disabled. See the [evidence-backed status](docs/STATUS.md).
 
 ## A Forum Extension, Not A Core Replacement
 
 - The internal identifier remains `pintogya` for route and protocol compatibility. The display name is **Togya Plugin**.
-- The planned package lives under `source/plugin/pintogya/`; it does not distribute a complete Discuz installation.
+- Package files live under `upload/source/plugin/pintogya/`; it does not distribute a complete Discuz installation.
 - It must not depend on private maintenance frameworks, fixed customer domains or database names.
 - The forum's own reading, posting, moderation and credit permissions remain authoritative.
 - Features needing extra core integration must be identified explicitly and rejected server-side when integration is missing.
@@ -35,7 +35,7 @@ These are capabilities being prepared, not claims of completed installation or e
 
 The target is **Discuz X5, PHP 8.2+, HTTPS and transactional InnoDB tables**. This is a requirements statement, not certification of every version combination. X3.x compatibility has not been established.
 
-The first RC documentation will cover:
+For an isolated evaluation:
 
 1. Verify the exact supported DX/PHP/database combination and back up the forum.
 2. Upload the release package and install through Discuz AdminCP.
@@ -63,7 +63,7 @@ Read [Privacy and Data Handling](docs/PRIVACY.md) before deployment. The design 
 
 Original project code is licensed under [0BSD](LICENSE). You may use, modify and redistribute it, including commercially, without an attribution or notice-retention condition under that license. No warranty is provided.
 
-Third-party components keep their own licenses and notices; 0BSD does not relicense them or the Discuz core. Their distribution inventory will accompany the first code package.
+Third-party components keep their own licenses and notices; 0BSD does not relicense them or the Discuz core. The package includes `THIRD_PARTY.md`; the owner confirmed redistribution of the included Togya product artwork. Third-party store marks are not relicensed.
 
 ## Contributing
 

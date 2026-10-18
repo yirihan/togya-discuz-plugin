@@ -6,7 +6,7 @@ The packager creates an archive and checks structural integrity. It does **not**
 
 ```sh
 python3 -m unittest discover -s tests -p test_build_release.py -v
-python3 tools/build_release.py --source path/to/source/plugin/pintogya --output build/Togya-Plugin-1.0.0-alpha.1-x5.zip
+python3 tools/build_release.py --source upload/source/plugin/pintogya --output build/Togya-Plugin-1.0.0-alpha.3-x5.zip
 ```
 
 The output filename must match the plugin's declared version. The source must contain matching installation metadata, lifecycle entry points and verified migration hashes. The builder includes the original and third-party license notices present in the source, along with the public documentation.
@@ -19,4 +19,4 @@ ZIP entry order, timestamps and regular-file modes are fixed. The archive includ
 
 Validation must still inspect the produced archive on Linux, check every manifest entry and verify the downloaded release checksum. A passed packager test or a checksum match cannot replace P2/P3 runtime gates. See [STATUS.md](STATUS.md) for the actual release state.
 
-This repository currently publishes documentation and packaging tooling only. The standalone plugin candidate remains private while the native-install gate is unresolved.
+The Alpha source candidate is for disposable evaluation, not production certification. Publication and remaining gates are recorded in [STATUS.md](STATUS.md); building locally does not mean a GitHub Release exists.

@@ -1,6 +1,6 @@
 # Release Status
 
-**Publication A: documentation preview. No supported installable release yet.**
+**Experimental Alpha source candidate: `1.0.0-alpha.3-x5`. Not an RC or a production-supported release.** Actual downloadable assets are listed on [GitHub Releases](https://github.com/yirihan/togya-discuz-plugin/releases); a local build is not a publication receipt.
 
 | Stage | Status | Evidence / next gate |
 | --- | --- | --- |
@@ -37,12 +37,16 @@
 | Generic canonical hosts | 1/3 | 44 focused assertions passed on macOS/Linux | alpha.3 shares the strict canonical-host validator across three activity constructors; removes an unintended www-only restriction. No origin or identity relaxation |
 | Native PC/Touch HTTP | Original 3 + one explicitly approved exception | Additional alpha.3 check passed 10/10 | Home/account for guest and synthetic member; CSRF/origin/guest-write/closed-extension checks; binding counts unchanged. Loopback TLS-termination model, not real TLS, visual or provider proof |
 | Native guest-read permissions | 3/3 | Passed 6/6 | Public topic allowed; private forum, high readperm, hidden first post, deleted thread and password forum denied. Missing native usergroup cache fixed without changing permission values; synthetic SQL fixtures rolled back |
+| Disk-cache/display adapters | 1/3 | Passed on macOS/Linux | 12 scenarios/21 assertions, real private files with synthetic clock/cache/binding callbacks; zero upstream calls. No full browser or multi-process proof |
+| Native SQL binding | 1/3 | Passed 9/9, 19 assertions | Actual repository/transactions, synthetic upstream and unused synthetic UIDs; pending, wrong session, encrypted approval, idempotency, owner conflict, expiry and revoke recovery; original binding count restored |
+| Cached activity renderer | 1/3 | Passed 5/5, 7 assertions | Actual renderer, native SQL mapping and disk cache; warm/cold/denied and mobile context, locked instructions hidden; zero transport calls; synthetic payload/key, no browser-layout proof |
+| Anonymous live public API | One read only | Passed | One public example GET validated by the candidate, no account/challenge writes; does not prove real QR approval |
 
 The invalid-CSRF negative test is accepted only for the plugin's explicit refusal or DX's exact native request-tainting refusal page. DX returns HTTP 503 for that native rejection before dispatch; it is not treated as a successful normal page or as proof that arbitrary 503 responses are safe.
 
-The plugin program candidate is not uploaded. A development archive exists locally but is not published, certified or described as installable. No RC or stable release exists. Optional native tasks/interactions/rewards remain server-side disabled pending their own evidence.
+The Alpha program source is an experimental evaluation candidate. It is disabled by default, not a supported production installer. No RC or stable release exists. Optional native tasks/interactions/credit grants remain server-side disabled pending their own evidence. The rights holder confirmed public redistribution of the included Togya Logo and example illustrations; third-party notices remain intact.
 
-The current publication remains documentation and packaging tools only. The owner explicitly approved one additional fixed-candidate installation attempt; it was consumed once and passed. This does not erase the original failures or authorize more installation retries. Unchanged-path installation evidence is retained; later source changes have their scoped evidence rather than invented fresh-install claims. Normal uninstall passed after repairing the isolated harness. Both example configurations passed synthetic isolation tests; only one has native lifecycle evidence. The separately approved single HTTP retest was also consumed once and passed. Activity cached-content rendering and provider verification remain incomplete. The active-binding uninstall gate reached its own three-attempt limit and is not automatically retried; registration/data retention was observed, but the missing prompt evidence is not relabeled a pass.
+Publishing Alpha source/package is an intermediate delivery, not completion of P3 or the stable goal. The owner explicitly approved one additional fixed-candidate installation attempt; it was consumed once and passed. This does not erase the original failures or authorize more installation retries. Unchanged-path installation evidence is retained; later source changes have their scoped evidence rather than invented fresh-install claims. Normal uninstall passed after repairing the isolated harness. Both example configurations passed synthetic isolation tests; only one has native lifecycle evidence. The separately approved single HTTP retest was also consumed once and passed. Full native activity publication, enabled live synchronization, visual/full media QA and real QR approval remain outstanding. The active-binding uninstall gate reached its own three-attempt limit and is not automatically retried; registration/data retention was observed, but the missing prompt evidence is not relabeled a pass.
 
 ## Bounded Acceptance
 
